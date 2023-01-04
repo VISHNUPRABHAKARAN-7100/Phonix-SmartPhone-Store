@@ -5,6 +5,12 @@ class SignInProvider extends ChangeNotifier {
 
   bool passwordVisibility = true;
 
+  ///Textformfield controller variables.
+  
+  
+  final phoneNumberController = TextEditingController();
+  final passwordController = TextEditingController();
+
   /// Set function
 
 // This function is for making the obscureText make true and false.
@@ -13,3 +19,11 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+
+
+
+
+
+
+
+

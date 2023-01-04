@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_controller.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provider.dart';
 import 'package:phonix_smartphone_store/splash_screen/splash_screen.dart';
 import 'package:provider/provider.dart';
 

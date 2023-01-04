@@ -2,11 +2,11 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_controller.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
 import 'package:provider/provider.dart';
 import '../../home_screen/view/home_screen.dart';
 import '../../widgets/custome_button.dart';
+import '../controller/sign_in_provider.dart';
 
 /// This screen is for user login
 /// If the user have already an account
