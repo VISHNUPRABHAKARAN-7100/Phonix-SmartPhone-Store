@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
+import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 
 /// This screen is for creating a new account
@@ -131,6 +132,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       // Textformfield for enter the password of the user.
                       TextFormField(
+                        obscureText: true,
                         controller: passwordEditingController,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(15),
@@ -170,6 +172,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       // Textformfield for re-enter the password of the user.
                       TextFormField(
+                        obscureText: true,
                         controller: confirmPasswordEditingController,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(15),
@@ -212,11 +215,29 @@ class SignUpScreen extends StatelessWidget {
                         title: 'SIGN UP',
                         ontap: () {
                           if (signUpFormGlobalKey.currentState!.validate()) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => HomeScreen(),
-                            ));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>  OTPScreen(),
+                              ),
+                            );
                           }
                         },
+                      ),
+                      // Navigation button to sign in page
+                      // if the user clicked the sign up button
+                      // accidentally and wants to go back to the sign in page.
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const Text('Already have an account?'),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('Login now'),
+                          )
+                        ],
                       )
                     ],
                   ),
