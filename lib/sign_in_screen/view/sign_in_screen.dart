@@ -17,7 +17,7 @@ import '../controller/sign_in_provider.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  final phoneNumberController = TextEditingController();
+  final emailEditingController = TextEditingController();
   final passwordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
 
@@ -74,14 +74,11 @@ class SignInScreen extends StatelessWidget {
                 key: formGlobalKey,
                 child: Column(
                   children: [
-                    // Textformfield for mobile number.
+                    // Textformfield for provide the emailID.
                     TextFormField(
-                      controller: phoneNumberController,
-                      inputFormatters: [
-                        LengthLimitingTextInputFormatter(10),
-                        FilteringTextInputFormatter.digitsOnly,
-                      ],
-                      keyboardType: TextInputType.number,
+                      controller: emailEditingController,
+                      textCapitalization: TextCapitalization.none,
+                      keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         labelStyle: const TextStyle(
                           color: Colors.black,
@@ -92,13 +89,17 @@ class SignInScreen extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        labelText: 'Phone Number',
+                        labelText: 'Email',
                         focusColor: Colors.black,
                         border: const OutlineInputBorder(),
                       ),
                       validator: (value) {
-                        if (value!.length < 10) {
-                          return 'Enter a valid phone number';
+                        if (value!.isEmpty ||
+                            value.length < 7 ||
+                            !value.contains("@") ||
+                            !value.contains('.') ||
+                            !value.contains(".com")) {
+                          return 'Enter a valid email address';
                         }
                         return null;
                       },
@@ -108,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                     ),
                     Consumer<SignInProvider>(
                       builder: (context, signInProviderValue, child) =>
-                      // Textformfield fo password.
+                          // Textformfield fo password.
                           TextFormField(
                         controller: passwordController,
                         obscureText: signInProviderValue.passwordVisibility,
@@ -167,11 +168,13 @@ class SignInScreen extends StatelessWidget {
                 title: 'SIGN IN',
                 ontap: () {
                   if (formGlobalKey.currentState!.validate()) {
+                    
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomeScreen(),
-                        ),);
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
                   }
                 },
               ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
+import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
+import 'package:provider/provider.dart';
 
 /// This screen is for creating a new account
 /// for user and user should provide the following
@@ -18,6 +19,7 @@ class SignUpScreen extends StatelessWidget {
   final emailEditingController = TextEditingController();
   final passwordEditingController = TextEditingController();
   final confirmPasswordEditingController = TextEditingController();
+  final phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +92,38 @@ class SignUpScreen extends StatelessWidget {
                         validator: (value) {
                           if (value!.length < 6) {
                             return 'Enter a valid name';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      // Textformfield for entering the phone number of the user.
+                      TextFormField(
+                        controller: phoneNumberController,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                          labelStyle: const TextStyle(
+                            color: Colors.black,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                            borderSide: const BorderSide(
+                              color: Colors.black,
+                            ),
+                          ),
+                          labelText: 'Phone Number',
+                          focusColor: Colors.black,
+                          border: const OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.length < 10) {
+                            return 'Enter a valid phone number';
                           }
                           return null;
                         },
@@ -215,9 +249,10 @@ class SignUpScreen extends StatelessWidget {
                         title: 'SIGN UP',
                         ontap: () {
                           if (signUpFormGlobalKey.currentState!.validate()) {
+                            Provider.of<OTPProvider>(context,listen: false).fetchOTP();
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) =>  OTPScreen(),
+                                builder: (context) => OTPScreen(),
                               ),
                             );
                           }

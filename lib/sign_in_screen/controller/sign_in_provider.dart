@@ -18,6 +18,8 @@ class SignInProvider extends ChangeNotifier {
     passwordVisibility = !passwordVisibility;
     notifyListeners();
   }
+
+  
 }
 
 

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
-class OtpProvider extends ChangeNotifier {
-
+class OTPProvider extends ChangeNotifier {
   // Textformfield variables
   final otpTextEditingController = TextEditingController();
   late String _otp;
@@ -13,13 +12,7 @@ class OtpProvider extends ChangeNotifier {
   Future<dynamic> fetchOTP() async {
     try {
       var response =
-          await http.post(Uri.parse('http://10.0.2.2:8000/register'), body: {
-        
-        "name": "test",
-        "email": "vishnuprabha478@gmail.com",
-        "password": "password",
-        "mobileNumber": "8129551837"
-      });
+          await http.post(Uri.parse('http://10.0.2.2:8000/register'));
       print(response.body);
     } catch (e) {
       print(e.toString());

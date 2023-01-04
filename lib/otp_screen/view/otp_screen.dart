@@ -10,7 +10,7 @@ class OTPScreen extends StatelessWidget {
 
   final otpTextEditingController = TextEditingController();
   final focusNode = FocusNode();
-  final formKeyForOtpVerification = GlobalKey<FormState>();
+  final formKeyForOTPVerification = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class OTPScreen extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Form(
-            key: formKeyForOtpVerification,
+            key: formKeyForOTPVerification,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -59,9 +59,9 @@ class OTPScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       CustomButton(
-                        title: 'VARIFY',
+                        title: 'VERIFY',
                         ontap: () {
-                          if (formKeyForOtpVerification.currentState!
+                          if (formKeyForOTPVerification.currentState!
                               .validate()) {
                             print(otpTextEditingController.text.toString());
                           }
