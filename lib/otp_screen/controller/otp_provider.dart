@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class OTPProvider extends ChangeNotifier {
+
+  // Variables for the textformfields.
+  final otpTextEditingController = TextEditingController();
   
   late String _otp;
 
