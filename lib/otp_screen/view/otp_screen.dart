@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
+
+import '../../sign_up_screen/controller/sign_up_provider.dart';
 
 /// This screen is for OTP verification
 /// and user should provide the OTP
@@ -63,7 +66,8 @@ class OTPScreen extends StatelessWidget {
                         ontap: () {
                           if (formKeyForOTPVerification.currentState!
                               .validate()) {
-                            print(otpTextEditingController.text.toString());
+                            Provider.of<SignUpProvider>(context,listen: false)
+                                .varifyOtp(otpTextEditingController.text,);
                           }
                         },
                       ),

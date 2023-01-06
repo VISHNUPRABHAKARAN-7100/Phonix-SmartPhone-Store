@@ -17,8 +17,6 @@ import '../controller/sign_in_provider.dart';
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
-  final emailEditingController = TextEditingController();
-  final passwordController = TextEditingController();
   final formGlobalKey = GlobalKey<FormState>();
 
   @override
@@ -66,61 +64,23 @@ class SignInScreen extends StatelessWidget {
                 width: size.width,
                 height: size.height * .1,
               ),
-              // Form for the validation of username and password
+              // Form for the validation of mobile number and password
               // the user should enter mobile number and password
               // The length of the mobile number should be 10 and
               // length of the password should be 8.
-              Form(
-                key: formGlobalKey,
-                child: Column(
-                  children: [
-                    // Textformfield for provide the emailID.
-                    TextFormField(
-                      controller: emailEditingController,
-                      textCapitalization: TextCapitalization.none,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: InputDecoration(
-                        labelStyle: const TextStyle(
-                          color: Colors.black,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        labelText: 'Email',
-                        focusColor: Colors.black,
-                        border: const OutlineInputBorder(),
-                      ),
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            value.length < 7 ||
-                            !value.contains("@") ||
-                            !value.contains('.') ||
-                            !value.contains(".com")) {
-                          return 'Enter a valid email address';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Consumer<SignInProvider>(
-                      builder: (context, signInProviderValue, child) =>
-                          // Textformfield fo password.
-                          TextFormField(
-                        controller: passwordController,
-                        obscureText: signInProviderValue.passwordVisibility,
+              Consumer<SignInProvider>(builder: (context,signInProviderValue, child) =>  Form(
+                  key: formGlobalKey,
+                  child: Column(
+                    children: [
+                      // Textformfield for provide the mobile number.
+                      TextFormField(
+                        controller:signInProviderValue. phoneNumberController,
+                        inputFormatters: [
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
-                          suffixIcon: IconButton(
-                            onPressed: () =>
-                                signInProviderValue.setPasswordVisibility(),
-                            icon: signInProviderValue.passwordVisibility
-                                ? const Icon(EvaIcons.eyeOff)
-                                : const Icon(EvaIcons.eye),
-                          ),
                           labelStyle: const TextStyle(
                             color: Colors.black,
                           ),
@@ -130,19 +90,57 @@ class SignInScreen extends StatelessWidget {
                               color: Colors.black,
                             ),
                           ),
-                          labelText: 'Password',
+                          labelText: 'Phone Number',
                           focusColor: Colors.black,
                           border: const OutlineInputBorder(),
                         ),
                         validator: (value) {
-                          if (value == null || value.length < 7) {
-                            return 'Enter Password';
+                          if (value!.length < 10) {
+                            return 'Enter a valid phone number';
                           }
                           return null;
                         },
                       ),
-                    ),
-                  ],
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Consumer<SignInProvider>(
+                        builder: (context, signInProviderValue, child) =>
+                            // Textformfield fo password.
+                            TextFormField(
+                          controller:signInProviderValue. passwordController,
+                          obscureText: signInProviderValue.passwordVisibility,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              onPressed: () =>
+                                  signInProviderValue.setPasswordVisibility(),
+                              icon: signInProviderValue.passwordVisibility
+                                  ? const Icon(EvaIcons.eyeOff)
+                                  : const Icon(EvaIcons.eye),
+                            ),
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'Password',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.length < 7) {
+                              return 'Enter Password';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               // Button for reset the password.
@@ -168,7 +166,6 @@ class SignInScreen extends StatelessWidget {
                 title: 'SIGN IN',
                 ontap: () {
                   if (formGlobalKey.currentState!.validate()) {
-                    
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
