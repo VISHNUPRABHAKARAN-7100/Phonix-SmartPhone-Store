@@ -99,7 +99,8 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         // Textformfield for entering the phone number of the user.
                         TextFormField(
-                          controller: signUpProviderValue.phoneNumberController,
+                          controller:
+                              signUpProviderValue.mobileNumberEditingController,
                           inputFormatters: [
                             LengthLimitingTextInputFormatter(10),
                             FilteringTextInputFormatter.digitsOnly,
@@ -254,17 +255,28 @@ class SignUpScreen extends StatelessWidget {
                           title: 'SIGN UP',
                           ontap: () {
                             if (signUpFormGlobalKey.currentState!.validate()) {
-                              Provider.of<OTPProvider>(context, listen: false)
-                                  .fetchOTP(
+                              // Provider.of<OTPProvider>(context, listen: false)
+                              //     .fetchOTP(
+                              //   signUpProviderValue.nameEditingController.text,
+                              //   signUpProviderValue.phoneNumberController.text,
+                              //   signUpProviderValue.emailEditingController.text,
+                              //   signUpProviderValue
+                              //       .confirmPasswordEditingController.text,
+                              // );
+                              signUpProviderValue.sendOtp(
                                 signUpProviderValue.nameEditingController.text,
-                                signUpProviderValue.phoneNumberController.text,
+                                signUpProviderValue
+                                    .mobileNumberEditingController.text,
                                 signUpProviderValue.emailEditingController.text,
                                 signUpProviderValue
                                     .confirmPasswordEditingController.text,
                               );
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => OTPScreen(),
+                                  builder: (context) => OTPScreen(
+                                    mobileNumber: signUpProviderValue
+                                        .mobileNumberEditingController.text,
+                                  ),
                                 ),
                               );
                             }

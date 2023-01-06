@@ -4,24 +4,23 @@ import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
-import '../../sign_up_screen/controller/sign_up_provider.dart';
-
 /// This screen is for OTP verification
 /// and user should provide the OTP
 /// for creating a new account.
 class OTPScreen extends StatelessWidget {
-  OTPScreen({Key? key}) : super(key: key);
+  OTPScreen({Key? key, required this.mobileNumber}) : super(key: key);
 
-  
   final focusNode = FocusNode();
   final formKeyForOTPVerification = GlobalKey<FormState>();
+  final String mobileNumber;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: Center(
-          child: Consumer<OTPProvider>(builder: (context, otpProviderValue, child) =>  Form(
+          child: Consumer<OTPProvider>(
+            builder: (context, otpProviderValue, child) => Form(
               key: formKeyForOTPVerification,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -33,7 +32,7 @@ class OTPScreen extends StatelessWidget {
                       androidSmsAutofillMethod:
                           AndroidSmsAutofillMethod.smsUserConsentApi,
                       listenForMultipleSmsOnAndroid: true,
-                      controller:otpProviderValue. otpTextEditingController,
+                      controller: otpProviderValue.otpTextEditingController,
                       defaultPinTheme: PinTheme(
                         width: 65,
                         height: 65,
@@ -67,15 +66,18 @@ class OTPScreen extends StatelessWidget {
                           ontap: () {
                             if (formKeyForOTPVerification.currentState!
                                 .validate()) {
-                              Provider.of<SignUpProvider>(context,listen: false)
-                                  .varifyOtp(otpProviderValue.otpTextEditingController.text,);
+                              otpProviderValue.varifyOTP(
+                                  mobileNumber,
+                                  otpProviderValue
+                                      .otpTextEditingController.text,
+                                  context);
                             }
                           },
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () => Navigator.of(context).pop(),
                           child: const Text(
-                            'Resend?',
+                            'Cancel',
                             style: TextStyle(
                               color: Colors.black,
                             ),
