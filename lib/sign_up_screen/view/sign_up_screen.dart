@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
+import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:provider/provider.dart';
 
@@ -15,11 +16,6 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
   final signUpFormGlobalKey = GlobalKey<FormState>();
-  final nameEditingController = TextEditingController();
-  final emailEditingController = TextEditingController();
-  final passwordEditingController = TextEditingController();
-  final confirmPasswordEditingController = TextEditingController();
-  final phoneNumberController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -61,226 +57,237 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               // Form for validation the data.
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Form(
-                  key: signUpFormGlobalKey,
-                  child: Column(
-                    children: [
-                      // Textformfield for entering the name of the user.
-                      TextFormField(
-                        controller: nameEditingController,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-                        ],
-                        keyboardType: TextInputType.name,
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
+              Consumer<SignUpProvider>(
+                builder: (context, signUpProviderValue, child) => Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 25),
+                  child: Form(
+                    key: signUpFormGlobalKey,
+                    child: Column(
+                      children: [
+                        // Textformfield for entering the name of the user.
+                        TextFormField(
+                          controller: signUpProviderValue.nameEditingController,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(10),
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z]")),
+                          ],
+                          keyboardType: TextInputType.name,
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(
                               color: Colors.black,
                             ),
-                          ),
-                          labelText: 'Name',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.length < 6) {
-                            return 'Enter a valid name';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // Textformfield for entering the phone number of the user.
-                      TextFormField(
-                        controller: phoneNumberController,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                          labelText: 'Phone Number',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.length < 10) {
-                            return 'Enter a valid phone number';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // Textformfield for entering the email address of the user.
-                      TextFormField(
-                        controller: emailEditingController,
-                        textCapitalization: TextCapitalization.none,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                          labelText: 'Email',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty ||
-                              value.length < 7 ||
-                              !value.contains("@") ||
-                              !value.contains('.') ||
-                              !value.contains(".com")) {
-                            return 'Enter a valid email address';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // Textformfield for enter the password of the user.
-                      TextFormField(
-                        obscureText: true,
-                        controller: passwordEditingController,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(15),
-                        ],
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                          labelText: 'Password',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (passwordEditingController.text
-                                  .toString()
-                                  .trim() !=
-                              confirmPasswordEditingController.text
-                                  .toString()
-                                  .trim()) {
-                            return 'Password misssmatch';
-                          } else if (value!.length < 6) {
-                            return 'Password should be at least 6 characters';
-                          } else if (value.isEmpty) {
-                            return 'Enter a valid password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // Textformfield for re-enter the password of the user.
-                      TextFormField(
-                        obscureText: true,
-                        controller: confirmPasswordEditingController,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(15),
-                        ],
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                          labelText: 'Confirm password',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (passwordEditingController.text
-                                  .toString()
-                                  .trim() !=
-                              confirmPasswordEditingController.text
-                                  .toString()
-                                  .trim()) {
-                            return 'Password misssmatch';
-                          } else if (value!.length < 6) {
-                            return 'Password should be at least 6 characters';
-                          } else if (value.isEmpty) {
-                            return 'Enter a valid password';
-                          }
-                          return null;
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      // Submit the form for creating a new account.
-                      CustomButton(
-                        title: 'SIGN UP',
-                        ontap: () {
-                          if (signUpFormGlobalKey.currentState!.validate()) {
-                            Provider.of<OTPProvider>(context, listen: false)
-                                .fetchOTP(
-                              nameEditingController.text,
-                              phoneNumberController.text,
-                              emailEditingController.text,
-                              confirmPasswordEditingController.text,
-                            );
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => OTPScreen(),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
                               ),
-                            );
-                          }
-                        },
-                      ),
-                      // Navigation button to sign in page
-                      // if the user clicked the sign up button
-                      // accidentally and wants to go back to the sign in page.
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text('Already have an account?'),
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text('Login now'),
-                          )
-                        ],
-                      )
-                    ],
+                            ),
+                            labelText: 'Name',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value!.length < 6) {
+                              return 'Enter a valid name';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // Textformfield for entering the phone number of the user.
+                        TextFormField(
+                          controller: signUpProviderValue.phoneNumberController,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(10),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'Phone Number',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value!.length < 10) {
+                              return 'Enter a valid phone number';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // Textformfield for entering the email address of the user.
+                        TextFormField(
+                          controller:
+                              signUpProviderValue.emailEditingController,
+                          textCapitalization: TextCapitalization.none,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'Email',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (value!.isEmpty ||
+                                value.length < 7 ||
+                                !value.contains("@") ||
+                                !value.contains('.') ||
+                                !value.contains(".com")) {
+                              return 'Enter a valid email address';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // Textformfield for enter the password of the user.
+                        TextFormField(
+                          obscureText: true,
+                          controller:
+                              signUpProviderValue.passwordEditingController,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(15),
+                          ],
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'Password',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (signUpProviderValue
+                                    .passwordEditingController.text
+                                    .toString()
+                                    .trim() !=
+                                signUpProviderValue
+                                    .confirmPasswordEditingController.text
+                                    .toString()
+                                    .trim()) {
+                              return 'Password misssmatch';
+                            } else if (value!.length < 6) {
+                              return 'Password should be at least 6 characters';
+                            } else if (value.isEmpty) {
+                              return 'Enter a valid password';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // Textformfield for re-enter the password of the user.
+                        TextFormField(
+                          obscureText: true,
+                          controller: signUpProviderValue
+                              .confirmPasswordEditingController,
+                          inputFormatters: [
+                            LengthLimitingTextInputFormatter(15),
+                          ],
+                          decoration: InputDecoration(
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                              ),
+                            ),
+                            labelText: 'Confirm password',
+                            focusColor: Colors.black,
+                            border: const OutlineInputBorder(),
+                          ),
+                          validator: (value) {
+                            if (signUpProviderValue
+                                    .passwordEditingController.text
+                                    .toString()
+                                    .trim() !=
+                                signUpProviderValue
+                                    .confirmPasswordEditingController.text
+                                    .toString()
+                                    .trim()) {
+                              return 'Password misssmatch';
+                            } else if (value!.length < 6) {
+                              return 'Password should be at least 6 characters';
+                            } else if (value.isEmpty) {
+                              return 'Enter a valid password';
+                            }
+                            return null;
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        // Submit the form for creating a new account.
+                        CustomButton(
+                          title: 'SIGN UP',
+                          ontap: () {
+                            if (signUpFormGlobalKey.currentState!.validate()) {
+                              Provider.of<OTPProvider>(context, listen: false)
+                                  .fetchOTP(
+                                signUpProviderValue.nameEditingController.text,
+                                signUpProviderValue.phoneNumberController.text,
+                                signUpProviderValue.emailEditingController.text,
+                                signUpProviderValue
+                                    .confirmPasswordEditingController.text,
+                              );
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => OTPScreen(),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        // Navigation button to sign in page
+                        // if the user clicked the sign up button
+                        // accidentally and wants to go back to the sign in page.
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            const Text('Already have an account?'),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Login now'),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
                 ),
               )

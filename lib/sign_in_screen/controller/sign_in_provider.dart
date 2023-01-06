@@ -7,7 +7,6 @@ class SignInProvider extends ChangeNotifier {
 
   ///Textformfield controller variables.
   
-  
   final phoneNumberController = TextEditingController();
   final passwordController = TextEditingController();
   

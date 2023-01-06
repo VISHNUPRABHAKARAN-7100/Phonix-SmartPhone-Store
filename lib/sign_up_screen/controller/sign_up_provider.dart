@@ -2,6 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpProvider extends ChangeNotifier {
+
+  // Variables for textformfields.
+  
+  final nameEditingController = TextEditingController();
+  final emailEditingController = TextEditingController();
+  final passwordEditingController = TextEditingController();
+  final confirmPasswordEditingController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+
 // Functions for sending the OTP to mail ID.
 
   Future<void> varifyOtp(String otp) async {
