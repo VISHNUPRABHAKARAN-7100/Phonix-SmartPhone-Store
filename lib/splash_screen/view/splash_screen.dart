@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
-import 'package:phonix_smartphone_store/splash_screen/splash_provider.dart';
+import 'package:phonix_smartphone_store/splash_screen/controller/splash_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// This screen is for displaying the splash screen
 /// and after showing the splash screen for 3 seconds
@@ -68,7 +67,6 @@ class _SplashScreenState extends State<SplashScreen> {
               style: GoogleFonts.poppins(
                 fontSize: 45,
                 color: Colors.white,
-                // fontWeight: FontWeight.bold,
               ),
             ),
           )

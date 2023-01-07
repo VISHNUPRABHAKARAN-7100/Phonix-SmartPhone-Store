@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';

@@ -68,13 +68,14 @@ class SignInScreen extends StatelessWidget {
               // the user should enter mobile number and password
               // The length of the mobile number should be 10 and
               // length of the password should be 8.
-              Consumer<SignInProvider>(builder: (context,signInProviderValue, child) =>  Form(
+              Consumer<SignInProvider>(
+                builder: (context, signInProviderValue, child) => Form(
                   key: formGlobalKey,
                   child: Column(
                     children: [
                       // Textformfield for provide the mobile number.
                       TextFormField(
-                        controller:signInProviderValue. phoneNumberController,
+                        controller: signInProviderValue.mobileNumberController,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(10),
                           FilteringTextInputFormatter.digitsOnly,
@@ -108,7 +109,7 @@ class SignInScreen extends StatelessWidget {
                         builder: (context, signInProviderValue, child) =>
                             // Textformfield fo password.
                             TextFormField(
-                          controller:signInProviderValue. passwordController,
+                          controller: signInProviderValue.passwordController,
                           obscureText: signInProviderValue.passwordVisibility,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -162,21 +163,28 @@ class SignInScreen extends StatelessWidget {
               ),
               // Button for sign in after filling the
               // username and password fields
-              CustomButton(
-                title: 'SIGN IN',
-                ontap: () {
-                  if (formGlobalKey.currentState!.validate()) {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomeScreen(),
-                      ),
-                    );
-                  }
-                },
+              Consumer<SignInProvider>(
+                builder: (context, signInProviderValue, child) => CustomButton(
+                  title: 'SIGN IN',
+                  ontap: () {
+                    if (formGlobalKey.currentState!.validate()) {
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => const HomeScreen(),
+                      //   ),
+                      // );
+                      signInProviderValue.signIn(
+                          signInProviderValue.mobileNumberController.text,
+                          signInProviderValue.passwordController.text,
+                          context);
+                    }
+                  },
+                ),
               ),
               // If the user has no account, then user can create
               // a new account by clicking the "Sign In " button.
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
