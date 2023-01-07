@@ -92,7 +92,7 @@ class SignUpScreen extends StatelessWidget {
                               return 'Enter a valid name';
                             }
                             return null;
-                          },
+                          },onFieldSubmitted: (value) => FocusScope.of(context).nextFocus(),
                         ),
                         const SizedBox(
                           height: 15,
