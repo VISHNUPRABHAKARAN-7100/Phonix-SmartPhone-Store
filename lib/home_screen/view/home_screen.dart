@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           },
-          child: const Text('data'),
+          child: const Text('Log out'),
         ),
       ),
     );

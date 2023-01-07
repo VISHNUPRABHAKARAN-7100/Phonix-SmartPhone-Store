@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
 import 'package:provider/provider.dart';
-import '../../home_screen/view/home_screen.dart';
 import '../../widgets/custome_button.dart';
 import '../controller/sign_in_provider.dart';
 

@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -63,7 +61,10 @@ class SignInProvider extends ChangeNotifier {
             ),
             padding: const EdgeInsets.all(15.0),
             elevation: 6.0,
-            margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+            margin: const EdgeInsets.symmetric(
+              vertical: 15,
+              horizontal: 10,
+            ),
             content: const Text('Invalid mobile number'),
           ),
         );
