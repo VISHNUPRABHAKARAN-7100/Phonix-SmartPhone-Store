@@ -32,7 +32,7 @@ class OTPProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(
-            builder: (context) => HomeScreen(),
+            builder: (context) => const HomeScreen(),
           ),
           (route) => false);
     } else {

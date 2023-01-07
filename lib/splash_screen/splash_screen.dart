@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// This screen is for displaying the splash screen
 /// and after showing the splash screen for 3 seconds
@@ -17,19 +19,42 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
+String? finalMobielNumber;
+
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(
-      const Duration(seconds: 3),
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>  SignInScreen(),
+    // Timer(
+    //   const Duration(seconds: 3),
+    //   () => Navigator.pushReplacement(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => SignInScreen(),
+    //     ),
+    //   ),
+    // );
+    getValidation().whenComplete(() async {
+      Timer(
+        const Duration(seconds: 3),
+        () => Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => (finalMobielNumber==null?SignInScreen():const HomeScreen()),
+          ),
         ),
-      ),
-    );
+      );
+    });
     super.initState();
+  }
+
+  Future getValidation() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedMobileNumber = sharedPreferences.getString('mobileNumber');
+    setState(() {
+      finalMobielNumber = obtainedMobileNumber;
+    });
+    
   }
 
   @override

@@ -40,6 +40,7 @@ dependencies:
   eva_icons_flutter: ^3.1.0
   google_fonts: ^3.0.1
   pinput: ^2.2.21
+  shared_preferences: ^2.0.15
 
 dev_dependencies:
   flutter_test:

@@ -255,14 +255,6 @@ class SignUpScreen extends StatelessWidget {
                           title: 'SIGN UP',
                           ontap: () {
                             if (signUpFormGlobalKey.currentState!.validate()) {
-                              // Provider.of<OTPProvider>(context, listen: false)
-                              //     .fetchOTP(
-                              //   signUpProviderValue.nameEditingController.text,
-                              //   signUpProviderValue.phoneNumberController.text,
-                              //   signUpProviderValue.emailEditingController.text,
-                              //   signUpProviderValue
-                              //       .confirmPasswordEditingController.text,
-                              // );
                               signUpProviderValue.sendOtp(
                                 signUpProviderValue.nameEditingController.text,
                                 signUpProviderValue
