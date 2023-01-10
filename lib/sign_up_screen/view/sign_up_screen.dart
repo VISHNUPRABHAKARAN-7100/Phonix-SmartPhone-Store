@@ -67,9 +67,9 @@ class SignUpScreen extends StatelessWidget {
                         TextFormField(
                           controller: signUpProviderValue.nameEditingController,
                           inputFormatters: [
-                            LengthLimitingTextInputFormatter(10),
+                            LengthLimitingTextInputFormatter(20),
                             FilteringTextInputFormatter.allow(
-                                RegExp("[a-zA-Z]")),
+                                RegExp("[a-zA-Z ]")),
                           ],
                           keyboardType: TextInputType.name,
                           decoration: InputDecoration(
@@ -91,10 +91,12 @@ class SignUpScreen extends StatelessWidget {
                               return 'Enter a valid name';
                             }
                             return null;
-                          },onFieldSubmitted: (value) => FocusScope.of(context).nextFocus(),
+                          },
+                          onFieldSubmitted: (value) =>
+                              FocusScope.of(context).nextFocus(),
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: size.height * .02,
                         ),
                         // Textformfield for entering the phone number of the user.
                         TextFormField(
@@ -126,8 +128,8 @@ class SignUpScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: size.height * .02,
                         ),
                         // Textformfield for entering the email address of the user.
                         TextFormField(
@@ -160,8 +162,8 @@ class SignUpScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: size.height * .02,
                         ),
                         // Textformfield for enter the password of the user.
                         TextFormField(
@@ -203,8 +205,8 @@ class SignUpScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: size.height * .02,
                         ),
                         // Textformfield for re-enter the password of the user.
                         TextFormField(
@@ -246,8 +248,8 @@ class SignUpScreen extends StatelessWidget {
                             return null;
                           },
                         ),
-                        const SizedBox(
-                          height: 15,
+                        SizedBox(
+                          height: size.height * .02,
                         ),
                         // Submit the form for creating a new account.
                         CustomButton(
@@ -283,7 +285,8 @@ class SignUpScreen extends StatelessWidget {
                             const Text('Already have an account?'),
                             TextButton(
                               onPressed: () {
-                                Navigator.pop(context);
+                                signUpProviderValue
+                                    .cancelButtonFunction(context);
                               },
                               child: const Text('Login now'),
                             )

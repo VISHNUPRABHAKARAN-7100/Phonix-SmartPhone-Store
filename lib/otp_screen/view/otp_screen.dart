@@ -80,7 +80,11 @@ class OTPScreen extends StatelessWidget {
                           },
                         ),
                         TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            otpProviderValue.otpTextEditingController.clear();
+                            
+                          },
                           child: const Text(
                             'Cancel',
                             style: TextStyle(

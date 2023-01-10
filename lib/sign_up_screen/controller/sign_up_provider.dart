@@ -24,6 +24,15 @@ class SignUpProvider extends ChangeNotifier {
   //   }
   // }
 
+  void cancelButtonFunction(context) {
+    nameEditingController.clear();
+    emailEditingController.clear();
+    passwordEditingController.clear();
+    confirmPasswordEditingController.clear();
+    mobileNumberEditingController.clear();
+    Navigator.pop(context);
+  }
+
   Future<dynamic> sendOtp(
       String name, String mobileNumber, String email, String password) async {
     try {
@@ -34,7 +43,6 @@ class SignUpProvider extends ChangeNotifier {
             'email': email,
             'password': password
           });
-      
     } catch (e) {
       log(e.toString());
     }
