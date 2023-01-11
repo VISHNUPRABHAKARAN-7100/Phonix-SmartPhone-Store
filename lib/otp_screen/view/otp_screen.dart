@@ -17,7 +17,9 @@ class OTPScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 248, 250, 250),
       body: SafeArea(
         child: Center(
           child: Consumer<OTPProvider>(
@@ -54,11 +56,11 @@ class OTPScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 30,
+                  SizedBox(
+                    height: size.height * 0.1,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
+                    padding: EdgeInsets.symmetric(horizontal: size.width * .1),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
@@ -83,7 +85,6 @@ class OTPScreen extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).pop();
                             otpProviderValue.otpTextEditingController.clear();
-                            
                           },
                           child: const Text(
                             'Cancel',
