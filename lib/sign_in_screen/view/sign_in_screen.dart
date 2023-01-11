@@ -167,23 +167,17 @@ class SignInScreen extends StatelessWidget {
                   title: 'SIGN IN',
                   ontap: () {
                     if (formGlobalKey.currentState!.validate()) {
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => const HomeScreen(),
-                      //   ),
-                      // );
                       signInProviderValue.signIn(
-                          signInProviderValue.mobileNumberController.text,
-                          signInProviderValue.passwordController.text,
-                          context);
+                        signInProviderValue.mobileNumberController.text,
+                        signInProviderValue.passwordController.text,
+                        context,
+                      );
                     }
                   },
                 ),
               ),
               // If the user has no account, then user can create
               // a new account by clicking the "Sign In " button.
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

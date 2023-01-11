@@ -74,10 +74,7 @@ class OTPScreen extends StatelessWidget {
                                   otpProviderValue
                                       .otpTextEditingController.text,
                                   context);
-                              final SharedPreferences sharedPreferences =
-                                  await SharedPreferences.getInstance();
-                              sharedPreferences.setString(
-                                  'mobileNumber', mobileNumber);
+                               
                             }
                           },
                         ),
