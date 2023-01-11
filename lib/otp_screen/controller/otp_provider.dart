@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
+import 'package:phonix_smartphone_store/home_screen/view/my_app_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OTPProvider extends ChangeNotifier {
@@ -20,7 +20,7 @@ class OTPProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => const MyAppScreen(),
             ),
             (route) => false);
 

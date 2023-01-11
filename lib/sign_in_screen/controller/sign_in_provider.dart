@@ -1,8 +1,9 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../home_screen/view/home_screen.dart';
+import '../../home_screen/view/my_app_screen.dart';
 
 class SignInProvider extends ChangeNotifier {
   /// Finalized variables
@@ -34,9 +35,13 @@ class SignInProvider extends ChangeNotifier {
       if (response.statusCode == 200) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const HomeScreen(),
+              builder: (context) => const MyAppScreen(),
             ),
             (route) => false);
+
+        final SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString('mobileNumber', mobileNumber);
       } else if (response.statusCode == 403) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

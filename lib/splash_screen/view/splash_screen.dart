@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
+import 'package:phonix_smartphone_store/home_screen/view/my_app_screen.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
 import 'package:phonix_smartphone_store/splash_screen/controller/splash_provider.dart';
 import 'package:provider/provider.dart';
@@ -36,23 +36,13 @@ class _SplashScreenState extends State<SplashScreen> {
                             .finalMobielNumber ==
                         null
                     ? SignInScreen()
-                    : const HomeScreen()),
+                    : const MyAppScreen()),
           ),
         ),
       );
     });
     super.initState();
   }
-
-  // Future getValidation() async {
-  //   final SharedPreferences sharedPreferences =
-  //       await SharedPreferences.getInstance();
-  //   var obtainedMobileNumber = sharedPreferences.getString('mobileNumber');
-  //   setState(() {
-  //     finalMobielNumber = obtainedMobileNumber;
-  //   });
-  //   print(finalMobielNumber);
-  // }
 
   @override
   Widget build(BuildContext context) {

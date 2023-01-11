@@ -3,7 +3,6 @@ import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart'
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// This screen is for OTP verification
 /// and user should provide the OTP
