@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,6 +76,7 @@ class SignInScreen extends StatelessWidget {
                     children: [
                       // Textformfield for provide the mobile number.
                       TextFormField(
+                        cursorColor: Colors.black,
                         controller: signInProviderValue.mobileNumberController,
                         inputFormatters: [
                           LengthLimitingTextInputFormatter(10),
@@ -108,6 +111,7 @@ class SignInScreen extends StatelessWidget {
                         builder: (context, signInProviderValue, child) =>
                             // Textformfield fo password.
                             TextFormField(
+                          cursorColor: Colors.black,
                           controller: signInProviderValue.passwordController,
                           obscureText: signInProviderValue.passwordVisibility,
                           decoration: InputDecoration(
@@ -115,8 +119,14 @@ class SignInScreen extends StatelessWidget {
                               onPressed: () =>
                                   signInProviderValue.setPasswordVisibility(),
                               icon: signInProviderValue.passwordVisibility
-                                  ? const Icon(EvaIcons.eyeOff)
-                                  : const Icon(EvaIcons.eye),
+                                  ? const Icon(
+                                      EvaIcons.eyeOff,
+                                      color: Colors.black,
+                                    )
+                                  : const Icon(
+                                      EvaIcons.eye,
+                                      color: Colors.black,
+                                    ),
                             ),
                             labelStyle: const TextStyle(
                               color: Colors.black,
@@ -132,8 +142,10 @@ class SignInScreen extends StatelessWidget {
                             border: const OutlineInputBorder(),
                           ),
                           validator: (value) {
-                            if (value == null || value.length < 7) {
-                              return 'Enter Password';
+                            if (value == null) {
+                              return 'Password is required';
+                            } else if (value.length < 7) {
+                              return 'Password should be at least 7 characters';
                             }
                             return null;
                           },
@@ -143,22 +155,8 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // Button for reset the password.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text('Forgot your password?'),
-                  TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Reset here',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
+              const SizedBox(
+                height: 15,
               ),
               // Button for sign in after filling the
               // username and password fields
@@ -167,6 +165,7 @@ class SignInScreen extends StatelessWidget {
                   title: 'SIGN IN',
                   ontap: () {
                     if (formGlobalKey.currentState!.validate()) {
+                      
                       signInProviderValue.signIn(
                         signInProviderValue.mobileNumberController.text,
                         signInProviderValue.passwordController.text,

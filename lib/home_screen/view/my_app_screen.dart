@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
-import 'package:phonix_smartphone_store/home_screen/view/bottom_navigation_widget.dart';
-import 'package:phonix_smartphone_store/home_screen/view/carousel_widget.dart';
 import 'package:phonix_smartphone_store/home_screen/view/cart.dart';
 import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
 import 'package:phonix_smartphone_store/home_screen/view/profile.dart';
@@ -13,10 +11,9 @@ import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart'
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-/// This screen is used to display home page
-/// of the application and it will display the
-/// carousel of the offers and
-/// new arrived products.
+/// This screen is for the base of Home Screen
+/// and the screen will change when the user
+/// clicks to the bottomnavigation bar items.
 
 class MyAppScreen extends StatelessWidget {
   const MyAppScreen({super.key});
@@ -24,7 +21,7 @@ class MyAppScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    List<Widget> pagesOfBottomNavigation = [
+    List<Widget> pagesOfBottomNavigation = const [
       HomeScreen(),
       Profile(),
       WishList(),
@@ -59,10 +56,10 @@ class MyAppScreen extends StatelessWidget {
         ],
       ),
       body: pagesOfBottomNavigation[
-          Provider.of<HomeScreenProvider>(context)
-              .selectedIndex],
+          Provider.of<HomeScreenProvider>(context).selectedIndex],
       bottomNavigationBar: Consumer<HomeScreenProvider>(
-        builder: (context, homeProviderValue, child) => BottomNavigationBar(currentIndex: homeProviderValue.selectedIndex,
+        builder: (context, homeProviderValue, child) => BottomNavigationBar(
+          currentIndex: homeProviderValue.selectedIndex,
           onTap: (value) {
             homeProviderValue.changeBottomNavigationPages(value);
           },
