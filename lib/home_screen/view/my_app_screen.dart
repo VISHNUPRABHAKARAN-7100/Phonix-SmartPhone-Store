@@ -1,4 +1,5 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,27 +39,14 @@ class MyAppScreen extends StatelessWidget {
               color: Colors.black, fontSize: size.height * 0.035),
         ),
         centerTitle: true,
-        iconTheme: const IconThemeData(),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              final SharedPreferences sharedPreferences =
-                  await SharedPreferences.getInstance();
-              sharedPreferences.remove('mobileNumber');
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => SignInScreen(),
-                ),
-              );
-            },
-            icon: const Icon(Icons.logout),
-          )
-        ],
       ),
       body: pagesOfBottomNavigation[
           Provider.of<HomeScreenProvider>(context).selectedIndex],
       bottomNavigationBar: Consumer<HomeScreenProvider>(
         builder: (context, homeProviderValue, child) => BottomNavigationBar(
+          selectedItemColor: Colors.black,
+          // selectedFontSize: 20,
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           currentIndex: homeProviderValue.selectedIndex,
           onTap: (value) {
             homeProviderValue.changeBottomNavigationPages(value);
@@ -70,21 +58,21 @@ class MyAppScreen extends StatelessWidget {
                 size: 30,
                 color: Colors.black,
               ),
-              label: 'Home',
+              label: '________',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.user,
                 color: Colors.black,
               ),
-              label: 'Home',
+              label: '________',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.heart,
                 color: Colors.black,
               ),
-              label: 'Home',
+              label: '________',
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -92,7 +80,7 @@ class MyAppScreen extends StatelessWidget {
                 size: 30,
                 color: Colors.black,
               ),
-              label: 'Home',
+              label: '________',
             ),
           ],
         ),

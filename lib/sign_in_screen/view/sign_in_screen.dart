@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
+import 'package:phonix_smartphone_store/utils/colors.dart';
+import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/custome_button.dart';
 import '../controller/sign_in_provider.dart';
@@ -24,10 +26,10 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 250, 250),
+      backgroundColor: ConstantColors.appBackgroundcolor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 248, 250, 250),
+        backgroundColor: ConstantColors.appBackgroundcolor,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -75,88 +77,67 @@ class SignInScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       // Textformfield for provide the mobile number.
-                      TextFormField(
-                        cursorColor: Colors.black,
-                        controller: signInProviderValue.mobileNumberController,
-                        inputFormatters: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          labelStyle: const TextStyle(
-                            color: Colors.black,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                            borderSide: const BorderSide(
-                              color: Colors.black,
-                            ),
-                          ),
-                          labelText: 'Phone Number',
-                          focusColor: Colors.black,
-                          border: const OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.length < 10) {
+                      CustomTextFormField(
+                        obscureText: false,
+                        textEditingController:
+                            signInProviderValue.mobileNumberController,
+                        labelText: 'Phone Number',
+                        ontap: () {
+                          if (signInProviderValue
+                                  .mobileNumberController.text.length <
+                              10) {
                             return 'Enter a valid phone number';
                           }
                           return null;
                         },
+                        inputFormats: [
+                          LengthLimitingTextInputFormatter(10),
+                          FilteringTextInputFormatter.digitsOnly,
+                        ],
+                        keyboardType: TextInputType.number,
                       ),
-                      const SizedBox(
-                        height: 15,
+
+                      SizedBox(
+                        height: size.height * .02,
                       ),
                       Consumer<SignInProvider>(
-                        builder: (context, signInProviderValue, child) =>
-                            // Textformfield fo password.
-                            TextFormField(
-                          cursorColor: Colors.black,
-                          controller: signInProviderValue.passwordController,
+                        builder: (context, value, child) => CustomTextFormField(
                           obscureText: signInProviderValue.passwordVisibility,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              onPressed: () =>
-                                  signInProviderValue.setPasswordVisibility(),
-                              icon: signInProviderValue.passwordVisibility
-                                  ? const Icon(
-                                      EvaIcons.eyeOff,
-                                      color: Colors.black,
-                                    )
-                                  : const Icon(
-                                      EvaIcons.eye,
-                                      color: Colors.black,
-                                    ),
-                            ),
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            labelText: 'Password',
-                            focusColor: Colors.black,
-                            border: const OutlineInputBorder(),
+                          textEditingController:
+                              signInProviderValue.passwordController,
+                          suffixIconButton: IconButton(
+                            onPressed: () =>
+                                signInProviderValue.setPasswordVisibility(),
+                            icon: signInProviderValue.passwordVisibility
+                                ? const Icon(
+                                    EvaIcons.eyeOff,
+                                    color: Colors.black,
+                                  )
+                                : const Icon(
+                                    EvaIcons.eye,
+                                    color: Colors.black,
+                                  ),
                           ),
-                          validator: (value) {
-                            if (value == null) {
+                          labelText: 'Password',
+                          ontap: () {
+                            if (signInProviderValue
+                                .passwordController.text.isEmpty) {
                               return 'Password is required';
-                            } else if (value.length < 7) {
+                            } else if (signInProviderValue
+                                    .passwordController.text.length <
+                                7) {
                               return 'Password should be at least 7 characters';
                             }
                             return null;
                           },
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ),
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: size.height * .02,
               ),
               // Button for sign in after filling the
               // username and password fields
@@ -165,7 +146,6 @@ class SignInScreen extends StatelessWidget {
                   title: 'SIGN IN',
                   ontap: () {
                     if (formGlobalKey.currentState!.validate()) {
-                      
                       signInProviderValue.signIn(
                         signInProviderValue.mobileNumberController.text,
                         signInProviderValue.passwordController.text,

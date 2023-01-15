@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton(
-      {Key? key,
-      required this.title,
-      required this.ontap,
-      this.colorOfButton = Colors.white,
-      this.backgroundColorOfButton = Colors.black})
-      : super(key: key);
+  const CustomButton({
+    Key? key,
+    required this.title,
+    required this.ontap,
+    this.colorOfButton = Colors.white,
+    this.backgroundColorOfButton = Colors.black,
+  }) : super(key: key);
 
   final String title;
   final Function() ontap;

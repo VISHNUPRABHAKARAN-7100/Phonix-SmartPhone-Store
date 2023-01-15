@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
+import 'package:phonix_smartphone_store/utils/colors.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 250, 250),
+      backgroundColor:ConstantColors.appBackgroundcolor,
       body: SafeArea(
         child: Center(
           child: Consumer<OTPProvider>(

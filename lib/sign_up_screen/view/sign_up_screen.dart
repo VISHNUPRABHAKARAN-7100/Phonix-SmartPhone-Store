@@ -1,8 +1,11 @@
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provider.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
+import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +52,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       width: size.width,
-                      height: size.height * .1,
+                      height: size.height * .05,
                     ),
                   ],
                 ),
@@ -63,69 +66,54 @@ class SignUpScreen extends StatelessWidget {
                     child: Column(
                       children: [
                         // Textformfield for entering the name of the user.
-                        TextFormField(
-                          controller: signUpProviderValue.nameEditingController,
-                          inputFormatters: [
+                        CustomTextFormField(
+                          obscureText: false,
+                          textEditingController:
+                              signUpProviderValue.nameEditingController,
+                          labelText: 'Name',
+                          ontap: () {
+                            if (signUpProviderValue
+                                .nameEditingController.text.isEmpty) {
+                              return 'Name is required';
+                            } else if (signUpProviderValue
+                                    .nameEditingController.text.length <
+                                6) {
+                              return 'Name should be at least 6 characters';
+                            }
+                            return null;
+                          },
+                          inputFormats: [
                             LengthLimitingTextInputFormatter(20),
                             FilteringTextInputFormatter.allow(
                                 RegExp("[a-zA-Z ]")),
                           ],
                           keyboardType: TextInputType.name,
-                          decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            labelText: 'Name',
-                            focusColor: Colors.black,
-                            border: const OutlineInputBorder(),
-                          ),
-                          validator: (value) {
-                            if (value!.length < 6) {
-                              return 'Enter a valid name';
-                            }
-                            return null;
-                          },
-                          onFieldSubmitted: (value) =>
-                              FocusScope.of(context).nextFocus(),
                         ),
                         SizedBox(
                           height: size.height * .02,
                         ),
                         // Textformfield for entering the phone number of the user.
-                        TextFormField(
-                          controller:
+                        CustomTextFormField(
+                          obscureText: false,
+                          textEditingController:
                               signUpProviderValue.mobileNumberEditingController,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(10),
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          keyboardType: TextInputType.number,
-                          decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            labelText: 'Phone Number',
-                            focusColor: Colors.black,
-                            border: const OutlineInputBorder(),
-                          ),
-                          validator: (value) {
-                            if (value!.length < 10) {
+                          labelText: 'Phone Number',
+                          ontap: () {
+                            if (signUpProviderValue
+                                .mobileNumberEditingController.text.isEmpty) {
+                              return 'Phone number is required';
+                            } else if (signUpProviderValue
+                                    .mobileNumberEditingController.text.length <
+                                10) {
                               return 'Enter a valid phone number';
                             }
                             return null;
                           },
+                          inputFormats: [
+                            LengthLimitingTextInputFormatter(10),
+                            FilteringTextInputFormatter.digitsOnly,
+                          ],
+                          keyboardType: TextInputType.number,
                         ),
                         SizedBox(
                           height: size.height * .02,
@@ -151,7 +139,9 @@ class SignUpScreen extends StatelessWidget {
                             border: const OutlineInputBorder(),
                           ),
                           validator: (value) {
-                            if (value!.isEmpty ||
+                            if (value!.isEmpty) {
+                              return 'Email is required';
+                            } else if (value.isEmpty ||
                                 value.length < 7 ||
                                 !value.contains("@") ||
                                 !value.contains('.') ||
@@ -165,29 +155,21 @@ class SignUpScreen extends StatelessWidget {
                           height: size.height * .02,
                         ),
                         // Textformfield for enter the password of the user.
-                        TextFormField(
-                          obscureText: true,
-                          controller:
+                        CustomTextFormField(
+                          obscureText: Provider.of<SignInProvider>(context)
+                              .passwordVisibility,
+                          textEditingController:
                               signUpProviderValue.passwordEditingController,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(15),
-                          ],
-                          decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            labelText: 'Password',
-                            focusColor: Colors.black,
-                            border: const OutlineInputBorder(),
-                          ),
-                          validator: (value) {
+                          labelText: 'Password',
+                          ontap: () {
                             if (signUpProviderValue
+                                .passwordEditingController.text.isEmpty) {
+                              return 'Password is required';
+                            } else if (signUpProviderValue
+                                    .passwordEditingController.text.length <
+                                6) {
+                              return 'Password should be at least 6 characters';
+                            } else if (signUpProviderValue
                                     .passwordEditingController.text
                                     .toString()
                                     .trim() !=
@@ -195,42 +177,49 @@ class SignUpScreen extends StatelessWidget {
                                     .confirmPasswordEditingController.text
                                     .toString()
                                     .trim()) {
-                              return 'Password misssmatch';
-                            } else if (value!.length < 6) {
-                              return 'Password should be at least 6 characters';
-                            } else if (value.isEmpty) {
-                              return 'Enter a valid password';
+                              return 'Password missmatch';
                             }
                             return null;
                           },
+                          inputFormats: [
+                            LengthLimitingTextInputFormatter(15),
+                          ],
+                          suffixIconButton: IconButton(
+                            onPressed: () => Provider.of<SignInProvider>(
+                                    context,
+                                    listen: false)
+                                .setPasswordVisibility(),
+                            icon: Provider.of<SignInProvider>(context)
+                                    .passwordVisibility
+                                ? const Icon(
+                                    EvaIcons.eyeOff,
+                                    color: Colors.black,
+                                  )
+                                : const Icon(
+                                    EvaIcons.eye,
+                                    color: Colors.black,
+                                  ),
+                          ),
                         ),
                         SizedBox(
                           height: size.height * .02,
                         ),
                         // Textformfield for re-enter the password of the user.
-                        TextFormField(
-                          obscureText: true,
-                          controller: signUpProviderValue
+                        CustomTextFormField(
+                          obscureText: Provider.of<SignInProvider>(context)
+                              .passwordVisibility,
+                          textEditingController: signUpProviderValue
                               .confirmPasswordEditingController,
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(15),
-                          ],
-                          decoration: InputDecoration(
-                            labelStyle: const TextStyle(
-                              color: Colors.black,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
-                                color: Colors.black,
-                              ),
-                            ),
-                            labelText: 'Confirm password',
-                            focusColor: Colors.black,
-                            border: const OutlineInputBorder(),
-                          ),
-                          validator: (value) {
+                          labelText: 'Confirm password',
+                          ontap: () {
                             if (signUpProviderValue
+                                .passwordEditingController.text.isEmpty) {
+                              return 'Password is required';
+                            } else if (signUpProviderValue
+                                    .passwordEditingController.text.length <
+                                6) {
+                              return 'Password should be at least 6 characters';
+                            } else if (signUpProviderValue
                                     .passwordEditingController.text
                                     .toString()
                                     .trim() !=
@@ -238,14 +227,29 @@ class SignUpScreen extends StatelessWidget {
                                     .confirmPasswordEditingController.text
                                     .toString()
                                     .trim()) {
-                              return 'Password misssmatch';
-                            } else if (value!.length < 6) {
-                              return 'Password should be at least 6 characters';
-                            } else if (value.isEmpty) {
-                              return 'Enter a valid password';
+                              return 'Password missmatch';
                             }
                             return null;
                           },
+                          inputFormats: [
+                            LengthLimitingTextInputFormatter(15),
+                          ],
+                          suffixIconButton: IconButton(
+                            onPressed: () => Provider.of<SignInProvider>(
+                                    context,
+                                    listen: false)
+                                .setPasswordVisibility(),
+                            icon: Provider.of<SignInProvider>(context)
+                                    .passwordVisibility
+                                ? const Icon(
+                                    EvaIcons.eyeOff,
+                                    color: Colors.black,
+                                  )
+                                : const Icon(
+                                    EvaIcons.eye,
+                                    color: Colors.black,
+                                  ),
+                          ),
                         ),
                         SizedBox(
                           height: size.height * .02,
