@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
-import 'package:phonix_smartphone_store/utils/colors.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/constant_colors.dart';
 
 /// This screen is for OTP verification
 /// and user should provide the OTP
@@ -19,7 +20,7 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor:ConstantColors.appBackgroundcolor,
+      backgroundColor:ConstantColors.appBackgroundColor,
       body: SafeArea(
         child: Center(
           child: Consumer<OTPProvider>(

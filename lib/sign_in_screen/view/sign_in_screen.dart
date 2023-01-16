@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
-import 'package:phonix_smartphone_store/utils/colors.dart';
 import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:provider/provider.dart';
+import '../../utils/constant_colors.dart';
 import '../../widgets/custome_button.dart';
 import '../controller/sign_in_provider.dart';
 
@@ -24,10 +24,10 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: ConstantColors.appBackgroundcolor,
+      backgroundColor: ConstantColors.appBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: ConstantColors.appBackgroundcolor,
+        backgroundColor: ConstantColors.appBackgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
