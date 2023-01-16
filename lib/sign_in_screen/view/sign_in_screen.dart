@@ -98,37 +98,35 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         height: size.height * .02,
                       ),
-                      Consumer<SignInProvider>(
-                        builder: (context, value, child) => CustomTextFormField(
-                          obscureText: signInProviderValue.passwordVisibility,
-                          textEditingController:
-                              signInProviderValue.passwordController,
-                          suffixIconButton: IconButton(
-                            onPressed: () =>
-                                signInProviderValue.setPasswordVisibility(),
-                            icon: signInProviderValue.passwordVisibility
-                                ? const Icon(
-                                    EvaIcons.eyeOff,
-                                    color: Colors.black,
-                                  )
-                                : const Icon(
-                                    EvaIcons.eye,
-                                    color: Colors.black,
-                                  ),
-                          ),
-                          labelText: 'Password',
-                          ontap: () {
-                            if (signInProviderValue
-                                .passwordController.text.isEmpty) {
-                              return 'Password is required';
-                            } else if (signInProviderValue
-                                    .passwordController.text.length <
-                                7) {
-                              return 'Password should be at least 7 characters';
-                            }
-                            return null;
-                          },
+                      CustomTextFormField(
+                        obscureText: signInProviderValue.passwordVisibility,
+                        textEditingController:
+                            signInProviderValue.passwordController,
+                        suffixIconButton: IconButton(
+                          onPressed: () =>
+                              signInProviderValue.setPasswordVisibility(),
+                          icon: signInProviderValue.passwordVisibility
+                              ? const Icon(
+                                  EvaIcons.eyeOff,
+                                  color: Colors.black,
+                                )
+                              : const Icon(
+                                  EvaIcons.eye,
+                                  color: Colors.black,
+                                ),
                         ),
+                        labelText: 'Password',
+                        ontap: () {
+                          if (signInProviderValue
+                              .passwordController.text.isEmpty) {
+                            return 'Password is required';
+                          } else if (signInProviderValue
+                                  .passwordController.text.length <
+                              7) {
+                            return 'Password should be at least 7 characters';
+                          }
+                          return null;
+                        },
                       )
                     ],
                   ),
