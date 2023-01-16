@@ -45,7 +45,7 @@ class Profile extends StatelessWidget {
                       ),
                     ),
                     TextButton(
-                      onPressed: () async {
+                          onPressed: () async {
                         Provider.of<ProfileProvider>(context, listen: false)
                             .logOutFunction(context);
                       },
