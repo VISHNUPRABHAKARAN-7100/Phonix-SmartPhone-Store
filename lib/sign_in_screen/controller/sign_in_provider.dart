@@ -10,6 +10,14 @@ class SignInProvider extends ChangeNotifier {
 
   bool passwordVisibility = true;
 
+  // Variable for showing the loader
+  bool showLoader = false;
+
+  void showLoadingFunction(bool value) {
+    showLoader = value;
+    notifyListeners();
+  }
+
   ///Textformfield controller variables.
 
   final mobileNumberController = TextEditingController();
@@ -26,13 +34,16 @@ class SignInProvider extends ChangeNotifier {
   // The function to user sign in the application
 
   Future<dynamic> signIn(String mobileNumber, String password, context) async {
+    showLoadingFunction(true);
     try {
       var response =
           await http.post(Uri.parse('http://10.0.2.2:8000/login'), body: {
         'mobileNumber': mobileNumber,
         'password': password,
       });
+
       if (response.statusCode == 200) {
+        showLoadingFunction(false);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const MyAppScreen(),

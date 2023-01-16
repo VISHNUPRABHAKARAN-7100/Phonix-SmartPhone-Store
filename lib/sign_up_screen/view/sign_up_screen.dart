@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provider.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
@@ -268,7 +269,7 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               );
                             }
-                          },
+                          }, isLoading: signUpProviderValue.showLoader,
                         ),
                         // Navigation button to sign in page
                         // if the user clicked the sign up button

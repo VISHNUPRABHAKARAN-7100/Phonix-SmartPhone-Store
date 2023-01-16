@@ -15,6 +15,15 @@ class SignUpProvider extends ChangeNotifier {
   bool isPasswordVisible = true;
   bool isConfirmPasswordVisible = true;
 
+// Variables for show loader.
+  bool showLoader = false;
+
+// Functions for show loader.
+  void showLoadingFunction(bool value) {
+    showLoader = value;
+    notifyListeners();
+  }
+
   // Functions for changing the password visibility
   changePasswordVisibility() {
     isPasswordVisible = !isPasswordVisible;
@@ -38,6 +47,7 @@ class SignUpProvider extends ChangeNotifier {
 // Functions for sending the OTP to mail ID.
   Future<dynamic> sendOtp(
       String name, String mobileNumber, String email, String password) async {
+    showLoadingFunction(true);
     try {
       var response = await http.post(Uri.parse('http://10.0.2.2:8000/register'),
           body: {
@@ -46,6 +56,7 @@ class SignUpProvider extends ChangeNotifier {
             'email': email,
             'password': password
           });
+      showLoadingFunction(false);
     } catch (e) {
       log(e.toString());
     }

@@ -25,10 +25,6 @@ class SignInScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: ConstantColors.appBackgroundColor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: ConstantColors.appBackgroundColor,
-      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SingleChildScrollView(
@@ -38,7 +34,7 @@ class SignInScreen extends StatelessWidget {
             children: [
               SizedBox(
                 width: size.width,
-                height: size.height * .1,
+                height: size.height * .25,
               ),
               // Greating text
               Align(
@@ -142,13 +138,16 @@ class SignInScreen extends StatelessWidget {
                   title: 'SIGN IN',
                   ontap: () {
                     if (formGlobalKey.currentState!.validate()) {
+                      
                       signInProviderValue.signIn(
                         signInProviderValue.mobileNumberController.text,
                         signInProviderValue.passwordController.text,
                         context,
                       );
                     }
+                    // signInProviderValue.showLoadingFunction(false);
                   },
+                  isLoading: signInProviderValue.showLoader,
                 ),
               ),
               // If the user has no account, then user can create

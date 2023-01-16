@@ -66,6 +66,7 @@ class OTPScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         CustomButton(
+                          isLoading: false,
                           title: 'VERIFY',
                           ontap: () async {
                             if (formKeyForOTPVerification.currentState!
