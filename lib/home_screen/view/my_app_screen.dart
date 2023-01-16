@@ -1,5 +1,4 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,9 +7,7 @@ import 'package:phonix_smartphone_store/home_screen/view/cart.dart';
 import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
 import 'package:phonix_smartphone_store/home_screen/view/profile.dart';
 import 'package:phonix_smartphone_store/home_screen/view/wishlist.dart';
-import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 /// This screen is for the base of Home Screen
 /// and the screen will change when the user

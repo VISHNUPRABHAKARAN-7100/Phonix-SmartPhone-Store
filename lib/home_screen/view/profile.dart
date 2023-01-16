@@ -1,10 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
+import 'package:provider/provider.dart';
 
-import '../../sign_in_screen/view/sign_in_screen.dart';
+// This screen is for showing the profile screen.
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -14,15 +14,17 @@ class Profile extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: size.width*0.03),
-          child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      padding: EdgeInsets.symmetric(horizontal: size.width * 0.03),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
             'Profile',
             style: GoogleFonts.ubuntu(fontSize: size.height * .035),
           ),
-          Divider(thickness: size.width*0.005,),
+          Divider(
+            thickness: size.width * 0.005,
+          ),
           ProfileTitleWidget(
             title: 'ADDRESS',
             onTap: () {},
@@ -32,37 +34,34 @@ class Profile extends StatelessWidget {
             onTap: () {
               showDialog(
                 context: context,
-                builder: (context) => CupertinoAlertDialog(
-                  title: const Text('haiii'),
-                  content: const Text('Do you accept'),
+                builder: (context) => AlertDialog(
+                  title: const Text('Do you want to Log Out?'),
                   actions: [
                     TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(FontAwesomeIcons.xmark),
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text(
+                        'NO',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                     TextButton(
                       onPressed: () async {
-                        final SharedPreferences sharedPreferences =
-                            await SharedPreferences.getInstance();
-                        sharedPreferences.remove('mobileNumber');
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(
-                            builder: (context) => SignInScreen(),
-                          ),
-                        );
+                        Provider.of<ProfileProvider>(context, listen: false)
+                            .logOutFunction(context);
                       },
-                      child: const Icon(FontAwesomeIcons.check),
+                      child: const Text(
+                        'YES',
+                        style: TextStyle(color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
               );
             },
           )
-      ],
-    ),
-        ));
+        ],
+      ),
+    ));
   }
 }
 
