@@ -11,6 +11,21 @@ class SignUpProvider extends ChangeNotifier {
   final confirmPasswordEditingController = TextEditingController();
   final mobileNumberEditingController = TextEditingController();
 
+  // Variables for password visibility.
+  bool isPasswordVisible = true;
+  bool isConfirmPasswordVisible = true;
+
+  // Functions for changing the password visibility
+  changePasswordVisibility() {
+    isPasswordVisible = !isPasswordVisible;
+    notifyListeners();
+  }
+
+  changeConfirmPasswordVisibility() {
+    isConfirmPasswordVisible = !isConfirmPasswordVisible;
+    notifyListeners();
+  }
+
   void cancelButtonFunction(context) {
     nameEditingController.clear();
     emailEditingController.clear();
@@ -31,9 +46,6 @@ class SignUpProvider extends ChangeNotifier {
             'email': email,
             'password': password
           });
-          
-
-          
     } catch (e) {
       log(e.toString());
     }

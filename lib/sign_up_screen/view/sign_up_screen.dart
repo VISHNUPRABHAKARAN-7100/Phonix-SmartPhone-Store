@@ -156,8 +156,7 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         // Textformfield for enter the password of the user.
                         CustomTextFormField(
-                          obscureText: Provider.of<SignInProvider>(context)
-                              .passwordVisibility,
+                          obscureText: signUpProviderValue.isPasswordVisible,
                           textEditingController:
                               signUpProviderValue.passwordEditingController,
                           labelText: 'Password',
@@ -185,12 +184,9 @@ class SignUpScreen extends StatelessWidget {
                             LengthLimitingTextInputFormatter(15),
                           ],
                           suffixIconButton: IconButton(
-                            onPressed: () => Provider.of<SignInProvider>(
-                                    context,
-                                    listen: false)
-                                .setPasswordVisibility(),
-                            icon: Provider.of<SignInProvider>(context)
-                                    .passwordVisibility
+                            onPressed: () =>
+                                signUpProviderValue.changePasswordVisibility(),
+                            icon: signUpProviderValue.isPasswordVisible
                                 ? const Icon(
                                     EvaIcons.eyeOff,
                                     color: Colors.black,
@@ -206,8 +202,8 @@ class SignUpScreen extends StatelessWidget {
                         ),
                         // Textformfield for re-enter the password of the user.
                         CustomTextFormField(
-                          obscureText: Provider.of<SignInProvider>(context)
-                              .passwordVisibility,
+                          obscureText:
+                              signUpProviderValue.isConfirmPasswordVisible,
                           textEditingController: signUpProviderValue
                               .confirmPasswordEditingController,
                           labelText: 'Confirm password',
@@ -235,12 +231,9 @@ class SignUpScreen extends StatelessWidget {
                             LengthLimitingTextInputFormatter(15),
                           ],
                           suffixIconButton: IconButton(
-                            onPressed: () => Provider.of<SignInProvider>(
-                                    context,
-                                    listen: false)
-                                .setPasswordVisibility(),
-                            icon: Provider.of<SignInProvider>(context)
-                                    .passwordVisibility
+                            onPressed: () => signUpProviderValue
+                                .changeConfirmPasswordVisibility(),
+                            icon: signUpProviderValue.isConfirmPasswordVisible
                                 ? const Icon(
                                     EvaIcons.eyeOff,
                                     color: Colors.black,
