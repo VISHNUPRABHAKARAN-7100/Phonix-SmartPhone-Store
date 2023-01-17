@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -10,13 +11,16 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
       child: ListView(
         children: [
-          SizedBox(
-            width: size.width,
-            height: size.height * .2,
-            child: const Image(
-              fit: BoxFit.cover,
-              image: NetworkImage(
-                'https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+          Shimmer.fromColors(
+            baseColor: Colors.black,highlightColor: Colors.yellow,
+            child: SizedBox(
+              width: size.width,
+              height: size.height * .2,
+              child: const Image(
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  'https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                ),
               ),
             ),
           ),
