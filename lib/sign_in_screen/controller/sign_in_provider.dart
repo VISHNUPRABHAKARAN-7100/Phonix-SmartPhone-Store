@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
+import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../home_screen/view/my_app_screen.dart';
@@ -37,8 +38,7 @@ class SignInProvider extends ChangeNotifier {
   Future<dynamic> signIn(String mobileNumber, String password, context) async {
     showLoadingFunction(true);
     try {
-      var response =
-          await http.post(Uri.parse('http://10.0.2.2:8000/login'), body: {
+      var response = await http.post(Uri.parse(baseUrl + userLogin), body: {
         'mobileNumber': mobileNumber,
         'password': password,
       });

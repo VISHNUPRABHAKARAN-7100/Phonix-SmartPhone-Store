@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
+import 'package:phonix_smartphone_store/utils/url.dart';
 
 import '../../otp_screen/view/otp_screen.dart';
 
@@ -54,21 +55,12 @@ class SignUpProvider extends ChangeNotifier {
   Future<dynamic> sendOtp(SignUpModel model, context) async {
     showLoadingFunction(true);
     try {
-      // var response = await http.post(Uri.parse('http://10.0.2.2:8000/register'),
-      //     body: {
-      //       'name': name,
-      //       'mobileNumber': mobileNumber,
-      //       'email': email,
-      //       'password': password
-      //     });
-      // showLoadingFunction(false);
-
-      Response response = await Dio()
-          .post('http://10.0.2.2:8000/register', data: model.toJson());
+      Response response =
+          await Dio().post(baseUrl + registerNewUs, data: model.toJson());
 
       if (response.statusCode == 200) {
         showLoadingFunction(false);
-        
+
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => OTPScreen(
