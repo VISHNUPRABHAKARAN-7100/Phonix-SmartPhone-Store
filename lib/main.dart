@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/home_screen/controller/carousel_widget_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
@@ -26,9 +25,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => OTPProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => CarouselWidgetProvider(),
-        ),
+        
         ChangeNotifierProvider(
           create: (context) => SignUpProvider(),
         ),

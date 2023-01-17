@@ -10,10 +10,9 @@ class HomeScreen extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
       child: ListView(
         children: [
-          Container(
+          SizedBox(
             width: size.width,
             height: size.height * .2,
-            color: Colors.amber,
             child: const Image(
               fit: BoxFit.cover,
               image: NetworkImage(

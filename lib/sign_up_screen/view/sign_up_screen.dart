@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
+import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
 import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:provider/provider.dart';
@@ -251,14 +252,25 @@ class SignUpScreen extends StatelessWidget {
                           title: 'SIGN UP',
                           ontap: () {
                             if (signUpFormGlobalKey.currentState!.validate()) {
-                              signUpProviderValue.sendOtp(
-                                signUpProviderValue.nameEditingController.text,
-                                signUpProviderValue
-                                    .mobileNumberEditingController.text,
-                                signUpProviderValue.emailEditingController.text,
-                                signUpProviderValue
-                                    .confirmPasswordEditingController.text,
+                              final signupModel = SignUpModel(
+                                name: signUpProviderValue
+                                    .nameEditingController.text,
+                                mobileNumber: int.parse(signUpProviderValue
+                                    .mobileNumberEditingController.text),
+                                email: signUpProviderValue
+                                    .emailEditingController.text,
+                                password: signUpProviderValue
+                                    .passwordEditingController.text,
                               );
+                              signUpProviderValue.sendOtp(signupModel);
+                              // signUpProviderValue.sendOtp(
+                              //   signUpProviderValue.nameEditingController.text,
+                              //   signUpProviderValue
+                              //       .mobileNumberEditingController.text,
+                              //   signUpProviderValue.emailEditingController.text,
+                              //   signUpProviderValue
+                              //       .confirmPasswordEditingController.text,
+                              // );
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => OTPScreen(
@@ -268,7 +280,8 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               );
                             }
-                          }, isLoading: signUpProviderValue.showLoader,
+                          },
+                          isLoading: signUpProviderValue.showLoader,
                         ),
                         // Navigation button to sign in page
                         // if the user clicked the sign up button
