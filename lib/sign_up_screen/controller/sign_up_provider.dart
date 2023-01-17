@@ -1,8 +1,12 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
+
+import '../../otp_screen/view/otp_screen.dart';
 
 class SignUpProvider extends ChangeNotifier {
   // Variables for textformfields.
@@ -47,8 +51,7 @@ class SignUpProvider extends ChangeNotifier {
   }
 
 // Functions for sending the OTP to mail ID.
-  Future<dynamic> sendOtp(
-      SignUpModel model) async {
+  Future<dynamic> sendOtp(SignUpModel model, context) async {
     showLoadingFunction(true);
     try {
       // var response = await http.post(Uri.parse('http://10.0.2.2:8000/register'),
@@ -60,8 +63,20 @@ class SignUpProvider extends ChangeNotifier {
       //     });
       // showLoadingFunction(false);
 
-      Response response = await Dio().post('http://10.0.2.2:8000/register', data: model.toJson());
-      showLoadingFunction(false);
+      Response response = await Dio()
+          .post('http://10.0.2.2:8000/register', data: model.toJson());
+
+      if (response.statusCode == 200) {
+        showLoadingFunction(false);
+        
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => OTPScreen(
+              mobileNumber: mobileNumberEditingController.text,
+            ),
+          ),
+        );
+      }
     } catch (e) {
       log(e.toString());
     }

@@ -147,7 +147,7 @@ class SignInScreen extends StatelessWidget {
                     }
                     // signInProviderValue.showLoadingFunction(false);
                   },
-                  isLoading: signInProviderValue.showLoader,
+                  // isLoading: signInProviderValue.showLoader,
                 ),
               ),
               // If the user has no account, then user can create

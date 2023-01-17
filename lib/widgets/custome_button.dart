@@ -8,14 +8,14 @@ class CustomButton extends StatelessWidget {
     required this.ontap,
     this.colorOfButton = Colors.white,
     this.backgroundColorOfButton = Colors.black,
-    required this.isLoading,
+    // required this.isLoading,
   }) : super(key: key);
 
   final String title;
   final Function() ontap;
   final Color colorOfButton;
   final Color backgroundColorOfButton;
-  final bool isLoading;
+  // final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,18 +26,22 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         child: Center(
-          child: isLoading == true
-              ? const CircularProgressIndicator(
-                  color: Colors.white,
-                )
-              : Text(
-                  title,
-                  style: GoogleFonts.urbanist(
-                    color: colorOfButton,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
+          child:
+
+              // isLoading == true
+              //     ? const CircularProgressIndicator(
+              //         color: Colors.white,
+              //       )
+              //     :
+
+              Text(
+            title,
+            style: GoogleFonts.urbanist(
+              color: colorOfButton,
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
         ),
       ),
     );

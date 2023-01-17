@@ -262,7 +262,7 @@ class SignUpScreen extends StatelessWidget {
                                 password: signUpProviderValue
                                     .passwordEditingController.text,
                               );
-                              signUpProviderValue.sendOtp(signupModel);
+                              signUpProviderValue.sendOtp(signupModel,context);
                               // signUpProviderValue.sendOtp(
                               //   signUpProviderValue.nameEditingController.text,
                               //   signUpProviderValue
@@ -271,17 +271,10 @@ class SignUpScreen extends StatelessWidget {
                               //   signUpProviderValue
                               //       .confirmPasswordEditingController.text,
                               // );
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => OTPScreen(
-                                    mobileNumber: signUpProviderValue
-                                        .mobileNumberEditingController.text,
-                                  ),
-                                ),
-                              );
+                              
                             }
                           },
-                          isLoading: signUpProviderValue.showLoader,
+                          // isLoading: signUpProviderValue.showLoader,
                         ),
                         // Navigation button to sign in page
                         // if the user clicked the sign up button

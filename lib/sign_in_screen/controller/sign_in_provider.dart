@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../home_screen/view/my_app_screen.dart';
@@ -54,35 +55,17 @@ class SignInProvider extends ChangeNotifier {
             await SharedPreferences.getInstance();
         sharedPreferences.setString('mobileNumber', mobileNumber);
       } else if (response.statusCode == 403) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(15.0),
-            elevation: 6.0,
-            margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-            content: const Text('Invalid password'),
-          ),
+        showLoadingFunction(true);
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'Invalid password',
+          color: Colors.red,
         );
       } else if (response.statusCode == 401) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(15.0),
-            elevation: 6.0,
-            margin: const EdgeInsets.symmetric(
-              vertical: 15,
-              horizontal: 10,
-            ),
-            content: const Text('Invalid mobile number'),
-          ),
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'User does not exist...',
+          color: Colors.red,
         );
       }
     } catch (e) {
