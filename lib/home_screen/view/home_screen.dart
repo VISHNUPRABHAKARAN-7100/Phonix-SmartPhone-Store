@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
           Provider.of<HomeScreenProvider>(
                     context,
                   ).isShimmerOfBanner ==
-                  true
+                  false
               ? const ShimmerWidget()
               : const HomeScreenAfterShimmer()
         ],

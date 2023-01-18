@@ -1,7 +1,10 @@
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/home_screen/view/my_app_screen.dart';
+import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OTPProvider extends ChangeNotifier {
@@ -12,10 +15,9 @@ class OTPProvider extends ChangeNotifier {
 
   Future<dynamic> varifyOTP(String mobileNumber, String otp, context) async {
     try {
-      var response =
-          await http.post(Uri.parse('http://10.0.2.2:8000/otpVerify'), body: {
+      Response response = await Dio().post(baseUrl + otpVarification, data: {
         "mobileNumber": mobileNumber,
-        'otp': otp,
+        "otp": otp,
       });
       if (response.statusCode == 200) {
         Navigator.of(context).pushAndRemoveUntil(
@@ -28,18 +30,10 @@ class OTPProvider extends ChangeNotifier {
             await SharedPreferences.getInstance();
         sharedPreferences.setString('mobileNumber', mobileNumber);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            behavior: SnackBarBehavior.floating,
-            backgroundColor: Colors.red,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-            padding: const EdgeInsets.all(15.0),
-            elevation: 6.0,
-            margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-            content: const Text('Incorrect OTP, Try again'),
-          ),
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'Incorrect OTP, Try again',
+          color: Colors.red,
         );
       }
     } catch (e) {

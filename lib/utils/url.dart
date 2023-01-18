@@ -6,3 +6,6 @@ String registerNewUs = "/register";
 
 // Variable for login an existing user in the application.
 String userLogin = "/login";
+
+// Variable for otp verification.
+String otpVarification = "/otpVerify";

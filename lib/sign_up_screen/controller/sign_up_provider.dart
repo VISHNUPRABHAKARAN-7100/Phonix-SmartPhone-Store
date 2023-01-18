@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -57,13 +58,7 @@ class SignUpProvider extends ChangeNotifier {
     try {
       Response response =
           await Dio().post(baseUrl + registerNewUs, data: model.toJson());
-      if (response.statusCode == 401) {
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'User already exists...',
-          color: Colors.red,
-        );
-      } else if (response.statusCode == 200) {
+      if (response.statusCode == 200) {
         showLoadingFunction(false);
 
         Navigator.of(context).push(
@@ -74,7 +69,20 @@ class SignUpProvider extends ChangeNotifier {
           ),
         );
       }
-    } catch (e) {
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 401) {
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'User already exists...',
+          color: Colors.red,
+        );
+      } else if (e is SocketException) {
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'No Internet',
+          color: Colors.red,
+        );
+      }
       log(e.toString());
     }
   }
