@@ -51,14 +51,19 @@ class SignUpProvider extends ChangeNotifier {
     Navigator.pop(context);
   }
 
-// Functions for sending the OTP to mail ID.
+// Functions for sending the OTP to Mobile Number.
   Future<dynamic> sendOtp(SignUpModel model, context) async {
     showLoadingFunction(true);
     try {
       Response response =
           await Dio().post(baseUrl + registerNewUs, data: model.toJson());
-
-      if (response.statusCode == 200) {
+      if (response.statusCode == 401) {
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'User already exists...',
+          color: Colors.red,
+        );
+      } else if (response.statusCode == 200) {
         showLoadingFunction(false);
 
         Navigator.of(context).push(

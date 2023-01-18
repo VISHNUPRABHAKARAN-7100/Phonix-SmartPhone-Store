@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
@@ -38,7 +39,7 @@ class SignInProvider extends ChangeNotifier {
   Future<dynamic> signIn(String mobileNumber, String password, context) async {
     showLoadingFunction(true);
     try {
-      var response = await http.post(Uri.parse(baseUrl + userLogin), body: {
+      Response response = await Dio().post(baseUrl + userLogin, data: {
         'mobileNumber': mobileNumber,
         'password': password,
       });
