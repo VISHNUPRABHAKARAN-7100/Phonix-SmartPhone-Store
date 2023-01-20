@@ -6,6 +6,8 @@ import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart'
 import 'package:phonix_smartphone_store/splash_screen/controller/splash_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/internet_connection.dart';
+
 /// This screen is for displaying the splash screen
 /// and after showing the splash screen for 3 seconds
 /// the screen will be automatically redirected to the
@@ -23,6 +25,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    checkInternetConnection(context);
     Provider.of<SplashProvider>(context, listen: false)
         .getValidation()
         .whenComplete(() async {

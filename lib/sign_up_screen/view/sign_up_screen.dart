@@ -2,7 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
+import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
 import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
@@ -252,6 +252,7 @@ class SignUpScreen extends StatelessWidget {
                           title: 'SIGN UP',
                           ontap: () {
                             if (signUpFormGlobalKey.currentState!.validate()) {
+                              checkInternetConnection(context);
                               final signupModel = SignUpModel(
                                 name: signUpProviderValue
                                     .nameEditingController.text,
@@ -262,7 +263,7 @@ class SignUpScreen extends StatelessWidget {
                                 password: signUpProviderValue
                                     .passwordEditingController.text,
                               );
-                              signUpProviderValue.sendOtp(signupModel,context);
+                              signUpProviderValue.sendOtp(signupModel, context);
                               // signUpProviderValue.sendOtp(
                               //   signUpProviderValue.nameEditingController.text,
                               //   signUpProviderValue
@@ -271,7 +272,7 @@ class SignUpScreen extends StatelessWidget {
                               //   signUpProviderValue
                               //       .confirmPasswordEditingController.text,
                               // );
-                              
+
                             }
                           },
                           // isLoading: signUpProviderValue.showLoader,

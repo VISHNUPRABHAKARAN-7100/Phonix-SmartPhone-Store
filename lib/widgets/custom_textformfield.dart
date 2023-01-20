@@ -10,7 +10,7 @@ class CustomTextFormField extends StatelessWidget {
       required this.labelText,
       required this.ontap,
       this.inputFormats,
-      this.keyboardType});
+      this.keyboardType,});
 
   final TextEditingController textEditingController;
   final bool obscureText;

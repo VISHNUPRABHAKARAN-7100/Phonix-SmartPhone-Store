@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
 import 'package:phonix_smartphone_store/widgets/custome_button.dart';
 import 'package:pinput/pinput.dart';
@@ -20,7 +21,7 @@ class OTPScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor:ConstantColors.appBackgroundColor,
+      backgroundColor: ConstantColors.appBackgroundColor,
       body: SafeArea(
         child: Center(
           child: Consumer<OTPProvider>(
@@ -69,6 +70,7 @@ class OTPScreen extends StatelessWidget {
                           // isLoading: false,
                           title: 'VERIFY',
                           ontap: () async {
+                            checkInternetConnection(context);
                             if (formKeyForOTPVerification.currentState!
                                 .validate()) {
                               otpProviderValue.varifyOTP(
@@ -76,7 +78,6 @@ class OTPScreen extends StatelessWidget {
                                   otpProviderValue
                                       .otpTextEditingController.text,
                                   context);
-                               
                             }
                           },
                         ),

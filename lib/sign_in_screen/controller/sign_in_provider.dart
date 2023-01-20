@@ -39,7 +39,7 @@ class SignInProvider extends ChangeNotifier {
   Future<dynamic> signIn(String mobileNumber, String password, context) async {
     showLoadingFunction(true);
     try {
-      Response response = await Dio().post(baseUrl + userLogin, data: {
+      var response = await Dio().post(baseUrl + userLogin, data: {
         'mobileNumber': mobileNumber,
         'password': password,
       });
@@ -69,7 +69,14 @@ class SignInProvider extends ChangeNotifier {
           color: Colors.red,
         );
       }
-    } catch (e) {
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 101 && e.response!.statusCode != null) {
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'No Internet Connection',
+          color: Colors.red,
+        );
+      }
       log(e.toString());
     }
   }

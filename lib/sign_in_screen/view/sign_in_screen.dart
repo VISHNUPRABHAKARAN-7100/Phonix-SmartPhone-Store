@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
 import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
 import 'package:provider/provider.dart';
+import '../../common/internet_connection.dart';
 import '../../utils/constant_colors.dart';
 import '../../widgets/custome_button.dart';
 import '../controller/sign_in_provider.dart';
@@ -137,8 +138,8 @@ class SignInScreen extends StatelessWidget {
                 builder: (context, signInProviderValue, child) => CustomButton(
                   title: 'SIGN IN',
                   ontap: () {
+                    checkInternetConnection(context);
                     if (formGlobalKey.currentState!.validate()) {
-                      
                       signInProviderValue.signIn(
                         signInProviderValue.mobileNumberController.text,
                         signInProviderValue.passwordController.text,

@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/home_screen/view/my_app_screen.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
@@ -36,7 +35,14 @@ class OTPProvider extends ChangeNotifier {
           color: Colors.red,
         );
       }
-    } catch (e) {
+    } on DioError catch (e) {
+      if (e.response!.statusCode == 101 && e.response!.statusCode != null) {
+        SnackBarPopUp.popUp(
+          context: context,
+          text: 'No Internet Connection',
+          color: Colors.red,
+        );
+      }
       log(e.toString());
     }
   }

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
@@ -83,7 +82,6 @@ class SignUpProvider extends ChangeNotifier {
           color: Colors.red,
         );
       }
-      log(e.toString());
     }
   }
 }
