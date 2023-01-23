@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
-import 'package:phonix_smartphone_store/widgets/custome_button.dart';
+import 'package:phonix_smartphone_store/widgets/button/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 

@@ -2,10 +2,10 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
+import 'package:phonix_smartphone_store/widgets/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../home_screen/view/my_app_screen.dart';
 
 class SignInProvider extends ChangeNotifier {
@@ -26,7 +26,6 @@ class SignInProvider extends ChangeNotifier {
   final mobileNumberController = TextEditingController();
   final passwordController = TextEditingController();
 
-  /// Set function
 
 // This function is for making the obscureText make true and false.
   void setPasswordVisibility() {
@@ -55,6 +54,13 @@ class SignInProvider extends ChangeNotifier {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString('mobileNumber', mobileNumber);
+
+        Provider.of<SignInProvider>(context, listen: false)
+            .mobileNumberController
+            .clear();
+        Provider.of<SignInProvider>(context, listen: false)
+            .passwordController
+            .clear();
       } else if (response.statusCode == 403) {
         showLoadingFunction(true);
         SnackBarPopUp.popUp(

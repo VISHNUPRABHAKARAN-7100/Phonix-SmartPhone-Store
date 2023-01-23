@@ -1,12 +1,13 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
-import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
-import 'package:phonix_smartphone_store/widgets/custome_button.dart';
+import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfield.dart';
+import 'package:phonix_smartphone_store/widgets/button/custome_button.dart';
 import 'package:provider/provider.dart';
 
 /// This screen is for creating a new account
@@ -105,7 +106,7 @@ class SignUpScreen extends StatelessWidget {
                             } else if (signUpProviderValue
                                     .mobileNumberEditingController.text.length <
                                 10) {
-                              return 'Enter a valid phone number';
+                              return 'Please enter a valid phone number';
                             }
                             return null;
                           },
@@ -264,15 +265,6 @@ class SignUpScreen extends StatelessWidget {
                                     .passwordEditingController.text,
                               );
                               signUpProviderValue.sendOtp(signupModel, context);
-                              // signUpProviderValue.sendOtp(
-                              //   signUpProviderValue.nameEditingController.text,
-                              //   signUpProviderValue
-                              //       .mobileNumberEditingController.text,
-                              //   signUpProviderValue.emailEditingController.text,
-                              //   signUpProviderValue
-                              //       .confirmPasswordEditingController.text,
-                              // );
-
                             }
                           },
                           // isLoading: signUpProviderValue.showLoader,
@@ -280,20 +272,30 @@ class SignUpScreen extends StatelessWidget {
                         // Navigation button to sign in page
                         // if the user clicked the sign up button
                         // accidentally and wants to go back to the sign in page.
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text('Already have an account?'),
-                            TextButton(
-                              onPressed: () {
-                                signUpProviderValue
-                                    .cancelButtonFunction(context);
-                              },
-                              child: const Text('Login now'),
-                            )
-                          ],
-                        )
+                        SizedBox(
+                          height: size.height * .01,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              const TextSpan(
+                                style: TextStyle(color: Colors.black),
+                                text: 'Already have an account?',
+                              ),
+                              TextSpan(
+                                text: 'Login',
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () => signUpProviderValue
+                                      .cancelButtonFunction(context),
+                              )
+                            ],
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
                       ],
                     ),
                   ),

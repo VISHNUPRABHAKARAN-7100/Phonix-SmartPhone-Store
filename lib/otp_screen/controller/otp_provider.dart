@@ -1,10 +1,12 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
+import 'package:phonix_smartphone_store/widgets/snackbar/snackbar.dart';
 import 'package:phonix_smartphone_store/home_screen/view/my_app_screen.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../sign_up_screen/controller/sign_up_provider.dart';
 
 class OTPProvider extends ChangeNotifier {
   // Variables for the textformfields.
@@ -28,6 +30,24 @@ class OTPProvider extends ChangeNotifier {
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString('mobileNumber', mobileNumber);
+
+        Provider.of<SignUpProvider>(context, listen: false)
+            .nameEditingController
+            .clear();
+        Provider.of<SignUpProvider>(context, listen: false)
+            .mobileNumberEditingController
+            .clear();
+        Provider.of<SignUpProvider>(context, listen: false)
+            .emailEditingController
+            .clear();
+        Provider.of<SignUpProvider>(context, listen: false)
+            .passwordEditingController
+            .clear();
+        Provider.of<SignUpProvider>(context, listen: false)
+            .confirmPasswordEditingController
+            .clear();
+        
+        
       } else {
         SnackBarPopUp.popUp(
           context: context,

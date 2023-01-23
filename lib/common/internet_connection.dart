@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/common/snackbar/snackbar.dart';
+import 'package:phonix_smartphone_store/widgets/snackbar/snackbar.dart';
 
 Future<bool> checkInternetConnection(BuildContext context) async {
   try {

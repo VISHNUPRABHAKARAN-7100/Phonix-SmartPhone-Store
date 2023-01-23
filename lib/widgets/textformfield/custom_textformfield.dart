@@ -2,29 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField(
-      {super.key,
-      required this.obscureText,
-      required this.textEditingController,
-      this.suffixIconButton,
-      required this.labelText,
-      required this.ontap,
-      this.inputFormats,
-      this.keyboardType,});
+  const CustomTextFormField({
+    super.key,
+    required this.obscureText,
+    required this.textEditingController,
+    this.suffixIconButton,
+    required this.labelText,
+    required this.ontap,
+    this.inputFormats,
+    this.keyboardType,
+  });
 
   final TextEditingController textEditingController;
   final bool obscureText;
-  IconButton? suffixIconButton;
+  final IconButton? suffixIconButton;
   final String labelText;
   final String? Function() ontap;
-  List<TextInputFormatter>? inputFormats;
-  TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormats;
+  final TextInputType? keyboardType;
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return TextFormField(
-      
       keyboardType: keyboardType,
       inputFormatters: inputFormats,
       cursorColor: Colors.black,

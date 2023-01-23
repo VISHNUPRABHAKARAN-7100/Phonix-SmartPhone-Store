@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/view/cart.dart';
-import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
+import 'package:phonix_smartphone_store/home_screen/view/home_screen_for_loading.dart';
 import 'package:phonix_smartphone_store/home_screen/view/profile.dart';
 import 'package:phonix_smartphone_store/home_screen/view/wishlist.dart';
 import 'package:provider/provider.dart';
@@ -20,10 +20,10 @@ class MyAppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     List<Widget> pagesOfBottomNavigation = const [
-      HomeScreen(),
-      Profile(),
+      HomeScreenForLoading(),
       WishList(),
-      Cart()
+      Cart(),
+      Profile(),
     ];
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 248, 250, 250),
@@ -37,14 +37,14 @@ class MyAppScreen extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: pagesOfBottomNavigation[
-          Provider.of<HomeScreenProvider>(context).selectedIndex],
+      body: pagesOfBottomNavigation[Provider.of<HomeScreenProvider>(context)
+          .selectedIndexOfBottomNvigationBar],
       bottomNavigationBar: Consumer<HomeScreenProvider>(
         builder: (context, homeProviderValue, child) => BottomNavigationBar(
           selectedItemColor: Colors.black,
           // selectedFontSize: 20,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
-          currentIndex: homeProviderValue.selectedIndex,
+          currentIndex: homeProviderValue.selectedIndexOfBottomNvigationBar,
           onTap: (value) {
             homeProviderValue.changeBottomNavigationPages(value);
           },
@@ -53,13 +53,6 @@ class MyAppScreen extends StatelessWidget {
               icon: Icon(
                 EvaIcons.homeOutline,
                 size: 30,
-                color: Colors.black,
-              ),
-              label: '________',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                FontAwesomeIcons.user,
                 color: Colors.black,
               ),
               label: '________',
@@ -75,6 +68,13 @@ class MyAppScreen extends StatelessWidget {
               icon: Icon(
                 EvaIcons.shoppingCartOutline,
                 size: 30,
+                color: Colors.black,
+              ),
+              label: '________',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                FontAwesomeIcons.user,
                 color: Colors.black,
               ),
               label: '________',

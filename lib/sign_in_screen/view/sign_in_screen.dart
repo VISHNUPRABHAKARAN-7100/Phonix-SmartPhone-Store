@@ -1,13 +1,14 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
-import 'package:phonix_smartphone_store/widgets/custom_textformfield.dart';
+import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfield.dart';
 import 'package:provider/provider.dart';
 import '../../common/internet_connection.dart';
 import '../../utils/constant_colors.dart';
-import '../../widgets/custome_button.dart';
+import '../../widgets/button/custome_button.dart';
 import '../controller/sign_in_provider.dart';
 
 /// This screen is for user login
@@ -30,7 +31,7 @@ class SignInScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: SingleChildScrollView(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
@@ -78,6 +79,10 @@ class SignInScreen extends StatelessWidget {
                             signInProviderValue.mobileNumberController,
                         labelText: 'Phone Number',
                         ontap: () {
+                          if (signInProviderValue
+                              .mobileNumberController.text.isEmpty) {
+                            return "Phone number is required";
+                          }
                           if (signInProviderValue
                                   .mobileNumberController.text.length <
                               10) {
@@ -153,27 +158,32 @@ class SignInScreen extends StatelessWidget {
               ),
               // If the user has no account, then user can create
               // a new account by clicking the "Sign In " button.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Don\'t have an account?'),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => SignUpScreen(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Sign up',
-                      style: TextStyle(
+              SizedBox(
+                height: size.height * .01,
+              ),
+              RichText(
+                text: TextSpan(
+                  children: [
+                    const TextSpan(
+                      style: TextStyle(color: Colors.black),
+                      text: 'Don\'t have an account?',
+                    ),
+                    TextSpan(
+                      text: 'Sign up',
+                      style: const TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                  ),
-                ],
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => SignUpScreen(),
+                              ),
+                            ),
+                    )
+                  ],
+                  style: const TextStyle(color: Colors.black),
+                ),
               ),
             ],
           ),
