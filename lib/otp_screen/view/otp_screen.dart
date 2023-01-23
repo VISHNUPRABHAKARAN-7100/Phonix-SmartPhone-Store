@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
+import 'package:phonix_smartphone_store/otp_screen/services/otp_services.dart';
 import 'package:phonix_smartphone_store/widgets/button/custome_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/constant_colors.dart';
 
 /// This screen is for OTP verification
@@ -73,7 +73,7 @@ class OTPScreen extends StatelessWidget {
                             checkInternetConnection(context);
                             if (formKeyForOTPVerification.currentState!
                                 .validate()) {
-                              otpProviderValue.varifyOTP(
+                              OtpServices.varifyOTP(
                                   mobileNumber,
                                   otpProviderValue
                                       .otpTextEditingController.text,

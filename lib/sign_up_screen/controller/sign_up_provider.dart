@@ -1,11 +1,4 @@
-import 'dart:io';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/widgets/snackbar/snackbar.dart';
-import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
-import 'package:phonix_smartphone_store/utils/url.dart';
-
-import '../../otp_screen/view/otp_screen.dart';
 
 class SignUpProvider extends ChangeNotifier {
   // Variables for textformfields.
