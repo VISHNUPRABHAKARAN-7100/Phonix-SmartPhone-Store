@@ -33,57 +33,5 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // The function to user sign in the application
-
-  Future<dynamic> signIn(String mobileNumber, String password, context) async {
-    showLoadingFunction(true);
-    try {
-      var response = await Dio().post(baseUrl + userLogin, data: {
-        'mobileNumber': mobileNumber,
-        'password': password,
-      });
-
-      if (response.statusCode == 200) {
-        showLoadingFunction(false);
-        Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) => const MyAppScreen(),
-            ),
-            (route) => false);
-
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString('mobileNumber', mobileNumber);
-
-        Provider.of<SignInProvider>(context, listen: false)
-            .mobileNumberController
-            .clear();
-        Provider.of<SignInProvider>(context, listen: false)
-            .passwordController
-            .clear();
-      } else if (response.statusCode == 403) {
-        showLoadingFunction(true);
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'Invalid password',
-          color: Colors.red,
-        );
-      } else if (response.statusCode == 401) {
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'User does not exist...',
-          color: Colors.red,
-        );
-      }
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 101 && e.response!.statusCode != null) {
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'No Internet Connection',
-          color: Colors.red,
-        );
-      }
-      log(e.toString());
-    }
-  }
+  
 }

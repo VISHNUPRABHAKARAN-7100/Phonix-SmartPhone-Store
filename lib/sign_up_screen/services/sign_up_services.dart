@@ -13,7 +13,7 @@ class SignUpServices {
     // showLoadingFunction(true);
     try {
       Response response =
-          await Dio().post(baseUrl + registerNewUser, data: model.toJson());
+          await Dio().post(Urls. baseUrl +Urls. registerNewUser, data: model.toJson());
       if (response.statusCode == 200) {
         // showLoadingFunction(false);
 

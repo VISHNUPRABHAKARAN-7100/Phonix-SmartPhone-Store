@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/services/sign_in_services.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
 import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfield.dart';
 import 'package:provider/provider.dart';
@@ -142,10 +143,10 @@ class SignInScreen extends StatelessWidget {
               Consumer<SignInProvider>(
                 builder: (context, signInProviderValue, child) => CustomButton(
                   title: 'SIGN IN',
-                  ontap: () {
+                  ontap: () async {
                     checkInternetConnection(context);
                     if (formGlobalKey.currentState!.validate()) {
-                      signInProviderValue.signIn(
+                      SignInService.signIn(
                         signInProviderValue.mobileNumberController.text,
                         signInProviderValue.passwordController.text,
                         context,

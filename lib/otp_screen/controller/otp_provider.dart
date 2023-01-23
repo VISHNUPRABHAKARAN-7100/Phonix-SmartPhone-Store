@@ -16,7 +16,8 @@ class OTPProvider extends ChangeNotifier {
 
   Future<dynamic> varifyOTP(String mobileNumber, String otp, context) async {
     try {
-      Response response = await Dio().post(baseUrl + otpVarification, data: {
+      Response response =
+          await Dio().post(Urls.baseUrl + Urls.otpVarification, data: {
         "mobileNumber": mobileNumber,
         "otp": otp,
       });
@@ -46,8 +47,6 @@ class OTPProvider extends ChangeNotifier {
         Provider.of<SignUpProvider>(context, listen: false)
             .confirmPasswordEditingController
             .clear();
-        
-        
       } else {
         SnackBarPopUp.popUp(
           context: context,
