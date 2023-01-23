@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/model/sign_in_model.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/services/sign_in_services.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/view/sign_up_screen.dart';
 import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfield.dart';
@@ -146,11 +147,17 @@ class SignInScreen extends StatelessWidget {
                   ontap: () async {
                     checkInternetConnection(context);
                     if (formGlobalKey.currentState!.validate()) {
-                      SignInService.signIn(
-                        signInProviderValue.mobileNumberController.text,
-                        signInProviderValue.passwordController.text,
-                        context,
+                      final signInModelObject = SignInModel(
+                        mobileNumber: int.parse(
+                            signInProviderValue.mobileNumberController.text),
+                        password: signInProviderValue.passwordController.text,
                       );
+                      SignInService.signIn(signInModelObject, context);
+                      // SignInService.signIn(
+                      //   signInProviderValue.mobileNumberController.text,
+                      //   signInProviderValue.passwordController.text,
+                      //   context,
+                      // );
                     }
                     // signInProviderValue.showLoadingFunction(false);
                   },

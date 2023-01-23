@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/model/sign_in_model.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,14 +11,11 @@ import '../controller/sign_in_provider.dart';
 
 class SignInService {
   // The function to user sign in the application
-  static Future<dynamic> signIn(
-      String mobileNumber, String password, context) async {
+  static Future<dynamic> signIn(SignInModel signInModel, context) async {
     // showLoadingFunction(true);
     try {
-      var response = await Dio().post(Urls.baseUrl + Urls.userLogin, data: {
-        'mobileNumber': mobileNumber,
-        'password': password,
-      });
+      var response = await Dio()
+          .post(Urls.baseUrl + Urls.userLogin, data: signInModel.toJson());
 
       if (response.statusCode == 200) {
         // showLoadingFunction(false);
@@ -29,8 +27,8 @@ class SignInService {
 
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
-        sharedPreferences.setString('mobileNumber', mobileNumber);
-
+        sharedPreferences.setString(
+            'mobileNumber', signInModel.mobileNumber.toString());
         Provider.of<SignInProvider>(context, listen: false)
             .mobileNumberController
             .clear();
