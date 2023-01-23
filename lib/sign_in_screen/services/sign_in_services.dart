@@ -12,13 +12,21 @@ import '../controller/sign_in_provider.dart';
 class SignInService {
   // The function to user sign in the application
   static Future<dynamic> signIn(SignInModel signInModel, context) async {
-    // showLoadingFunction(true);
+    // This widget is used to show a circular progress indicator
+    // to the user that the server is loading.
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 2,
+        ),
+      ),
+    );
     try {
       var response = await Dio()
           .post(Urls.baseUrl + Urls.userLogin, data: signInModel.toJson());
-
       if (response.statusCode == 200) {
-        // showLoadingFunction(false);
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const MyAppScreen(),
@@ -38,19 +46,21 @@ class SignInService {
       }
     } on DioError catch (e) {
       if (e.response!.statusCode == 101 && e.response!.statusCode != null) {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'No Internet Connection',
           color: Colors.red,
         );
       } else if (e.response!.statusCode == 403) {
-        // showLoadingFunction(true);
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'Invalid password',
           color: Colors.red,
         );
       } else if (e.response!.statusCode == 401) {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'User does not exist...',

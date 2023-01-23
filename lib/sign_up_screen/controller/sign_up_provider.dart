@@ -16,11 +16,7 @@ class SignUpProvider extends ChangeNotifier {
 // Variables for show loader.
   bool showLoader = false;
 
-// Functions for show loader.
-  void showLoadingFunction(bool value) {
-    showLoader = value;
-    notifyListeners();
-  }
+
 
   // Functions for changing the password visibility
   changePasswordVisibility() {

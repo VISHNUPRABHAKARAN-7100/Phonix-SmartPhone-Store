@@ -5,13 +5,25 @@ import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart'
 import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../home_screen/view/my_app_screen.dart';
 import '../../sign_up_screen/controller/sign_up_provider.dart';
 import '../../widgets/snackbar/snackbar.dart';
 
-class OtpServices{
-  static Future<dynamic> varifyOTP(String mobileNumber, String otp, context) async {
+class OtpServices {
+  static Future<dynamic> varifyOTP(
+      String mobileNumber, String otp, context) async {
+// This widget is used to show a circular progress indicator
+    // to the user that the server is loading.
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 2,
+        ),
+      ),
+    );
+
     try {
       Response response =
           await Dio().post(Urls.baseUrl + Urls.otpVarification, data: {
@@ -44,10 +56,11 @@ class OtpServices{
         Provider.of<SignUpProvider>(context, listen: false)
             .confirmPasswordEditingController
             .clear();
-            Provider.of<OTPProvider>(context, listen: false)
+        Provider.of<OTPProvider>(context, listen: false)
             .otpTextEditingController
             .clear();
       } else {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'Incorrect OTP, Try again',
@@ -56,6 +69,7 @@ class OtpServices{
       }
     } on DioError catch (e) {
       if (e.response!.statusCode == 101 && e.response!.statusCode != null) {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'No Internet Connection',

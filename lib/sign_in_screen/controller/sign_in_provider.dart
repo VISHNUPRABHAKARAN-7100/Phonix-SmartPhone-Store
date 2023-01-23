@@ -9,10 +9,7 @@ class SignInProvider extends ChangeNotifier {
   // Variable for showing the loader
   bool showLoader = false;
 
-  void showLoadingFunction(bool value) {
-    showLoader = value;
-    notifyListeners();
-  }
+ 
 
   ///Textformfield controller variables.
 

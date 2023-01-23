@@ -153,13 +153,7 @@ class SignInScreen extends StatelessWidget {
                         password: signInProviderValue.passwordController.text,
                       );
                       SignInService.signIn(signInModelObject, context);
-                      // SignInService.signIn(
-                      //   signInProviderValue.mobileNumberController.text,
-                      //   signInProviderValue.passwordController.text,
-                      //   context,
-                      // );
                     }
-                    // signInProviderValue.showLoadingFunction(false);
                   },
                   // isLoading: signInProviderValue.showLoader,
                 ),

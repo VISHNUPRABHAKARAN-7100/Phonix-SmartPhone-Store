@@ -10,13 +10,22 @@ class SignUpServices {
 // Functions for sending the OTP to Mobile Number.
   static Future<dynamic> sendOtp(
       SignUpModel model, context, String mobileNumberEditingController) async {
-    // showLoadingFunction(true);
-    try {
-      Response response =
-          await Dio().post(Urls. baseUrl +Urls. registerNewUser, data: model.toJson());
-      if (response.statusCode == 200) {
-        // showLoadingFunction(false);
+    // This widget is used to show a circular progress indicator
+    // to the user that the server is loading.
+    showDialog(
+      context: context,
+      builder: (context) => const Center(
+        child: CircularProgressIndicator(
+          color: Colors.white,
+          strokeWidth: 2,
+        ),
+      ),
+    );
 
+    try {
+      Response response = await Dio()
+          .post(Urls.baseUrl + Urls.registerNewUser, data: model.toJson());
+      if (response.statusCode == 200) {
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => OTPScreen(
@@ -27,12 +36,14 @@ class SignUpServices {
       }
     } on DioError catch (e) {
       if (e.response!.statusCode == 401) {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'User already exists...',
           color: Colors.red,
         );
       } else if (e is SocketException) {
+        Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,
           text: 'No Internet',
