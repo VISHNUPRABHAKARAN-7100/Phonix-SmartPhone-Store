@@ -28,22 +28,24 @@ class _SplashScreenState extends State<SplashScreen> {
     checkInternetConnection(context);
     Provider.of<SplashProvider>(context, listen: false)
         .getValidation()
-        .whenComplete(() async {
-      Timer(
-        const Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) =>
-                (Provider.of<SplashProvider>(context, listen: false)
-                            .finalMobielNumber ==
-                        null
-                    ? SignInScreen()
-                    : const MyAppScreen()),
+        .whenComplete(
+      () async {
+        Timer(
+          const Duration(seconds: 3),
+          () => Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  (Provider.of<SplashProvider>(context, listen: false)
+                              .finalMobielNumber ==
+                          null
+                      ? SignInScreen()
+                      : const MyAppScreen()),
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
     super.initState();
   }
 

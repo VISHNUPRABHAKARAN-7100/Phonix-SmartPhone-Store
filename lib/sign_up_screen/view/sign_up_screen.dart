@@ -10,6 +10,8 @@ import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfie
 import 'package:phonix_smartphone_store/widgets/button/custome_button.dart';
 import 'package:provider/provider.dart';
 
+import '../services/sign_up_services.dart';
+
 /// This screen is for creating a new account
 /// for user and user should provide the following
 /// details and user will get a OTP and
@@ -251,7 +253,7 @@ class SignUpScreen extends StatelessWidget {
                         // Submit the form for creating a new account.
                         CustomButton(
                           title: 'SIGN UP',
-                          ontap: () {
+                          ontap: () async {
                             if (signUpFormGlobalKey.currentState!.validate()) {
                               checkInternetConnection(context);
                               final signupModel = SignUpModel(
@@ -264,7 +266,12 @@ class SignUpScreen extends StatelessWidget {
                                 password: signUpProviderValue
                                     .passwordEditingController.text,
                               );
-                              signUpProviderValue.sendOtp(signupModel, context);
+                              SignUpServices.sendOtp(
+                                signupModel,
+                                context,
+                                signUpProviderValue
+                                    .mobileNumberEditingController.text,
+                              );
                             }
                           },
                           // isLoading: signUpProviderValue.showLoader,
@@ -281,6 +288,11 @@ class SignUpScreen extends StatelessWidget {
                               const TextSpan(
                                 style: TextStyle(color: Colors.black),
                                 text: 'Already have an account?',
+                              ),
+                              const WidgetSpan(
+                                alignment: PlaceholderAlignment.baseline,
+                                baseline: TextBaseline.alphabetic,
+                                child: SizedBox(width: 8),
                               ),
                               TextSpan(
                                 text: 'Login',

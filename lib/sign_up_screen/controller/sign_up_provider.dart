@@ -49,37 +49,12 @@ class SignUpProvider extends ChangeNotifier {
     Navigator.pop(context);
   }
 
-// Functions for sending the OTP to Mobile Number.
-  Future<dynamic> sendOtp(SignUpModel model, context) async {
-    showLoadingFunction(true);
-    try {
-      Response response =
-          await Dio().post(baseUrl + registerNewUs, data: model.toJson());
-      if (response.statusCode == 200) {
-        showLoadingFunction(false);
 
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => OTPScreen(
-              mobileNumber: mobileNumberEditingController.text,
-            ),
-          ),
-        );
-      }
-    } on DioError catch (e) {
-      if (e.response!.statusCode == 401) {
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'User already exists...',
-          color: Colors.red,
-        );
-      } else if (e is SocketException) {
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'No Internet',
-          color: Colors.red,
-        );
-      }
-    }
-  }
+
+
+
+
+
+
+
 }

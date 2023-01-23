@@ -2,7 +2,7 @@
 String baseUrl = "http://10.0.2.2:8000";
 
 // Variable for registering a new user in the application.
-String registerNewUs = "/register";
+String registerNewUser = "/register";
 
 // Variable for login an existing user in the application.
 String userLogin = "/login";

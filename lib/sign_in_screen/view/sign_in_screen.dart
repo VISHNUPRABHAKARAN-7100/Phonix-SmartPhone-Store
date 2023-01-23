@@ -168,6 +168,11 @@ class SignInScreen extends StatelessWidget {
                       style: TextStyle(color: Colors.black),
                       text: 'Don\'t have an account?',
                     ),
+                    const WidgetSpan(
+                      alignment: PlaceholderAlignment.baseline,
+                      baseline: TextBaseline.alphabetic,
+                      child: SizedBox(width: 8),
+                    ),
                     TextSpan(
                       text: 'Sign up',
                       style: const TextStyle(
