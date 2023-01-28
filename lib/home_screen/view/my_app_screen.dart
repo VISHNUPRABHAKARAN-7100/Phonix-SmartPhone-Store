@@ -6,7 +6,8 @@ import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provid
 import 'package:phonix_smartphone_store/home_screen/view/cart.dart';
 import 'package:phonix_smartphone_store/home_screen/view/home_screen_for_loading.dart';
 import 'package:phonix_smartphone_store/home_screen/view/profile.dart';
-import 'package:phonix_smartphone_store/home_screen/view/wishlist.dart';
+import 'package:phonix_smartphone_store/utils/constant_colors.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/view/wishlist_screen.dart';
 import 'package:provider/provider.dart';
 
 /// This screen is for the base of Home Screen
@@ -21,19 +22,20 @@ class MyAppScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     List<Widget> pagesOfBottomNavigation = const [
       HomeScreenForLoading(),
-      WishList(),
+      WishListScreen(),
       Cart(),
       Profile(),
     ];
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 250, 250),
+      backgroundColor: ConstantColors.appBackgroundColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 248, 250, 250),
+        backgroundColor: ConstantColors.appBackgroundColor,
         title: Text(
           'PHONIX',
           style: GoogleFonts.ubuntu(
-              color: Colors.black, fontSize: size.height * 0.035),
+              color: ConstantColors.constantBlackColor,
+              fontSize: size.height * 0.035),
         ),
         centerTitle: true,
       ),

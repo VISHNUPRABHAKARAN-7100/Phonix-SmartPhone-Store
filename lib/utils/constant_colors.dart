@@ -4,4 +4,6 @@ class ConstantColors {
   
   static const appBackgroundColor = Color.fromARGB(255, 248, 250, 250);
   static const constantBlackColor = Colors.black;
+
+  static const constantRedColor = Colors.red;
 }

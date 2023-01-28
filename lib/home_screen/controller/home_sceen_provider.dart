@@ -1,12 +1,8 @@
-import 'dart:convert';
-import 'dart:developer';
-import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:phonix_smartphone_store/home_screen/model/banner_model.dart';
 import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/home_screen/services/banner_services.dart';
 import 'package:phonix_smartphone_store/home_screen/services/product_services.dart';
-import '../../utils/url.dart';
 
 class HomeScreenProvider with ChangeNotifier {
 // Variablef for the index value of the bottom navigation bar.
@@ -28,16 +24,16 @@ class HomeScreenProvider with ChangeNotifier {
   }
 
 // Function to get Data from API of products
-  void getDataOfProducts() async {
-    productModels = await ProductServices().fetchDataOfProduct();
+  void getDataOfProducts(BuildContext context) async {
+    productModels = await ProductServices().fetchDataOfProduct(context);
     notifyListeners();
     
   }
 
   // Function to get data from API of Banner
 
-  void getBanner() async {
-    bannerModels = await BannerServices().getBannerService();
+  void getBanner(BuildContext context) async {
+    bannerModels = await BannerServices().getBannerService(context);
     notifyListeners();
     // print(bannerModels?.couponName.toString());
   }

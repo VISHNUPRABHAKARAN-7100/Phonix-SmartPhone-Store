@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provider.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,6 +59,12 @@ class OtpServices {
             .clear();
         Provider.of<OTPProvider>(context, listen: false)
             .otpTextEditingController
+            .clear();
+        Provider.of<SignInProvider>(context, listen: false)
+            .mobileNumberController
+            .clear();
+        Provider.of<SignInProvider>(context, listen: false)
+            .passwordController
             .clear();
       } else {
         Navigator.of(context).pop();

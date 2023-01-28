@@ -1,7 +1,5 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
-import 'package:phonix_smartphone_store/home_screen/services/product_services.dart';
 import 'package:provider/provider.dart';
 
 /// This screen is used to display the details of
@@ -14,15 +12,16 @@ class HomeScreen extends StatelessWidget {
     // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
 
     // });
-    Provider.of<HomeScreenProvider>(context, listen: false).getDataOfProducts();
-    Provider.of<HomeScreenProvider>(context, listen: false).getBanner();
+    Provider.of<HomeScreenProvider>(context, listen: false)
+        .getDataOfProducts(context);
+    Provider.of<HomeScreenProvider>(context, listen: false).getBanner(context);
     // This variable is used to calculate the size of the device.
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
       child: Consumer<HomeScreenProvider>(
         builder: (context, productValue, child) {
-          print(productValue.bannerModels?.image?.first.url.toString());
+          // print(productValue.bannerModels?.image.first.url.toString());
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -31,16 +30,11 @@ class HomeScreen extends StatelessWidget {
                 height: size.height * .2,
                 child: Image(
                   fit: BoxFit.cover,
-                  image: NetworkImage(""
-
-                      // productValue.bannerModels?.image?.first.url.toString() ??
-                      //     "",
-                      ),
+                  image: NetworkImage(productValue
+                      .bannerModels!.banner.first.image.first.url
+                      .toString()),
                 ),
               ),
-              ElevatedButton(onPressed: () {
-                Provider.of<HomeScreenProvider>(context, listen: false).getBanner();
-              }, child: Text('aha')),
               SizedBox(
                 height: size.height * 0.01,
               ),

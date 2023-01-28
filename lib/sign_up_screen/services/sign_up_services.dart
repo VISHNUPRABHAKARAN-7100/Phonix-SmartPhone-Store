@@ -1,9 +1,8 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/exception/dio_exceptions.dart';
 import 'package:phonix_smartphone_store/otp_screen/view/otp_screen.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
-import '../../widgets/snackbar/snackbar.dart';
 import '../model/sign_up_model.dart';
 
 class SignUpServices {
@@ -35,21 +34,23 @@ class SignUpServices {
         );
       }
     } on DioError catch (e) {
-      if (e.response?.statusCode == 401) {
-        Navigator.of(context).pop();
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'User already exists...',
-          color: Colors.red,
-        );
-      } else if (e is SocketException) {
-        Navigator.of(context).pop();
-        SnackBarPopUp.popUp(
-          context: context,
-          text: 'No Internet',
-          color: Colors.red,
-        );
-      }
+      // if (e.response?.statusCode == 401) {
+      //   Navigator.of(context).pop();
+      //   SnackBarPopUp.popUp(
+      //     context: context,
+      //     text: 'User already exists...',
+      //     color: Colors.red,
+      //   );
+      // } else if (e is SocketException) {
+      //   Navigator.of(context).pop();
+      //   SnackBarPopUp.popUp(
+      //     context: context,
+      //     text: 'No Internet',
+      //     color: Colors.red,
+      //   );
+      // }
+
+      DioExceptions().dioError(e, context);
     }
   }
 }

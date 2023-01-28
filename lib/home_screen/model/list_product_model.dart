@@ -7,13 +7,13 @@ class ProductModel {
     if (json['products'] != null) {
       products = <Products>[];
       json['products'].forEach((v) {
-        products!.add(new Products.fromJson(v));
+        products!.add(  Products.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =   Map<String, dynamic>();
     if (this.products != null) {
       data['products'] = this.products!.map((v) => v.toJson()).toList();
     }
@@ -64,7 +64,7 @@ class Products {
     if (json['image'] != null) {
       image = <Image>[];
       json['image'].forEach((v) {
-        image!.add(new Image.fromJson(v));
+        image!.add(  Image.fromJson(v));
       });
     }
     createdAt = json['createdAt'];
@@ -73,7 +73,7 @@ class Products {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =   Map<String, dynamic>();
     data['_id'] = this.sId;
     data['productname'] = this.productname;
     data['price'] = this.price;
@@ -107,7 +107,7 @@ class Image {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data =   Map<String, dynamic>();
     data['url'] = this.url;
     data['filename'] = this.filename;
     data['_id'] = this.sId;
