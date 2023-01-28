@@ -12,6 +12,7 @@ class ShimmerWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Shimmer.fromColors(
+            direction: ShimmerDirection.rtl,
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: Container(
@@ -24,6 +25,7 @@ class ShimmerWidget extends StatelessWidget {
             height: size.height * 0.01,
           ),
           Shimmer.fromColors(
+            direction: ShimmerDirection.rtl,
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: Container(
@@ -39,6 +41,7 @@ class ShimmerWidget extends StatelessWidget {
             height: size.height * .01,
           ),
           Shimmer.fromColors(
+            direction: ShimmerDirection.rtl,
             baseColor: Colors.grey.shade300,
             highlightColor: Colors.grey.shade100,
             child: GridView.builder(

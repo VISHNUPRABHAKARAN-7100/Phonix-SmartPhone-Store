@@ -255,6 +255,7 @@ class SignUpScreen extends StatelessWidget {
                           title: 'SIGN UP',
                           ontap: () async {
                             if (signUpFormGlobalKey.currentState!.validate()) {
+                              FocusScope.of(context).unfocus();
                               checkInternetConnection(context);
                               final signupModel = SignUpModel(
                                 name: signUpProviderValue

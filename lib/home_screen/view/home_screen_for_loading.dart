@@ -12,18 +12,18 @@ class HomeScreenForLoading extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * 0.01),
-      child: ListView(
-        children: [
-          Provider.of<HomeScreenProvider>(
-                    context,
-                  ).isShimmerOfBanner ==
-                  false
-              ? const ShimmerWidget()
-              : const HomeScreen()
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Provider.of<HomeScreenProvider>(
+                      context,
+                    ).isShimmerOfHomeScreen ==
+                    true
+                ? const ShimmerWidget()
+                : const HomeScreen()
+          ],
+        ),
       ),
     );
   }
 }
-
-

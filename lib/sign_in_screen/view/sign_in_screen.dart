@@ -147,6 +147,7 @@ class SignInScreen extends StatelessWidget {
                   ontap: () async {
                     checkInternetConnection(context);
                     if (formGlobalKey.currentState!.validate()) {
+                      FocusScope.of(context).unfocus();
                       final signInModelObject = SignInModel(
                         mobileNumber: int.parse(
                             signInProviderValue.mobileNumberController.text),

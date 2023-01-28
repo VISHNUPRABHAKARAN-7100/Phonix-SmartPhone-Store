@@ -35,7 +35,7 @@ class SignUpServices {
         );
       }
     } on DioError catch (e) {
-      if (e.response!.statusCode == 401) {
+      if (e.response?.statusCode == 401) {
         Navigator.of(context).pop();
         SnackBarPopUp.popUp(
           context: context,

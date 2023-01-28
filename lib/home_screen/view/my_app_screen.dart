@@ -42,7 +42,6 @@ class MyAppScreen extends StatelessWidget {
       bottomNavigationBar: Consumer<HomeScreenProvider>(
         builder: (context, homeProviderValue, child) => BottomNavigationBar(
           selectedItemColor: Colors.black,
-          // selectedFontSize: 20,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           currentIndex: homeProviderValue.selectedIndexOfBottomNvigationBar,
           onTap: (value) {

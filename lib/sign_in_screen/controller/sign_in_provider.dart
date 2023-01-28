@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class SignInProvider extends ChangeNotifier {
   /// Finalized variables
@@ -8,8 +7,6 @@ class SignInProvider extends ChangeNotifier {
 
   // Variable for showing the loader
   bool showLoader = false;
-
- 
 
   ///Textformfield controller variables.
 
