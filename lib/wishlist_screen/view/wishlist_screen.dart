@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
 
+/// This screen is used to display the items in the
+/// wishlist and user can add the items to the cart if they
+/// need. And user can delete the items from the wishlist.
+
 class WishListScreen extends StatelessWidget {
   const WishListScreen({super.key});
 
@@ -30,7 +34,7 @@ class WishListScreen extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: size.width * 0.02,
                 crossAxisSpacing: size.width * 0.02,
-                childAspectRatio: 0.65,
+                childAspectRatio: 0.55,
               ),
               itemBuilder: (BuildContext context, int index) {
                 return Column(
@@ -38,11 +42,11 @@ class WishListScreen extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                        // color: Colors.red,
-                        borderRadius:
-                            BorderRadius.circular(size.width * 0.04),
+                        borderRadius: BorderRadius.circular(size.width * 0.04),
                       ),
-                      height: size.height * 0.27,child: Image.network('https://m.media-amazon.com/images/I/81UT07JsBqL._SX679_.jpg'),
+                      height: size.height * 0.3,
+                      child: Image.network(
+                          'https://m.media-amazon.com/images/I/81UT07JsBqL._SX679_.jpg'),
                     ),
                     Text(
                       'Product Name',
@@ -67,7 +71,8 @@ class WishListScreen extends StatelessWidget {
                         children: [
                           TextSpan(
                             style: TextStyle(
-                                color: ConstantColors.constantBlackColor),
+                              color: ConstantColors.constantBlackColor,
+                            ),
                             text: 'MRP',
                           ),
                           WidgetSpan(
@@ -82,9 +87,57 @@ class WishListScreen extends StatelessWidget {
                             ),
                           )
                         ],
-                        
                       ),
                     ),
+                    const Spacer(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.circular(size.width * 0.02),
+                            border: Border.all(),
+                          ),
+                          height: size.height * 0.050,
+                          width: size.height * 0.050,
+                          child: IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.delete_outline_outlined,
+                            ),
+                          ),
+                        ),
+                        GestureDetector(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                              borderRadius:
+                                  BorderRadius.circular(size.width * 0.02),
+                              border: Border.all(),
+                            ),
+                            width: 130,
+                            height: size.height * 0.050,
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: const [
+                                  Icon(
+                                    Icons.shopping_bag_outlined,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Add to Cart',
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
                   ],
                 );
               },

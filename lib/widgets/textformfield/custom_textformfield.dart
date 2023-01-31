@@ -46,7 +46,8 @@ class CustomTextFormField extends StatelessWidget {
         labelText: labelText,
         focusColor: ConstantColors.constantBlackColor,
         border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(size.width * 0.02)),
+          borderRadius: BorderRadius.circular(size.width * 0.02),
+        ),
       ),
       validator: (String? value) {
         // ontap();
