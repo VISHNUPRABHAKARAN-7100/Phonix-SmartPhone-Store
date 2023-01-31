@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../utils/constant_colors.dart';
+
 class CustomButton extends StatelessWidget {
   const CustomButton({
     Key? key,
     required this.title,
     required this.ontap,
     this.colorOfButton = Colors.white,
-    this.backgroundColorOfButton = Colors.black,
-    // required this.isLoading,
+    this.backgroundColorOfButton = ConstantColors.constantBlackColor,
   }) : super(key: key);
 
   final String title;
   final Function() ontap;
   final Color colorOfButton;
   final Color backgroundColorOfButton;
-  // final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +26,7 @@ class CustomButton extends StatelessWidget {
         width: double.infinity,
         height: 50,
         child: Center(
-          child:
-
-              // isLoading == true
-              //     ? const CircularProgressIndicator(
-              //         color: Colors.white,
-              //       )
-              //     :
-
-              Text(
+          child: Text(
             title,
             style: GoogleFonts.urbanist(
               color: colorOfButton,

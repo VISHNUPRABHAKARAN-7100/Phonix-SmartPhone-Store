@@ -10,7 +10,7 @@ import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfie
 import 'package:provider/provider.dart';
 import '../../common/internet_connection.dart';
 import '../../utils/constant_colors.dart';
-import '../../widgets/button/custome_button.dart';
+import '../../widgets/button/custom_button.dart';
 import '../controller/sign_in_provider.dart';
 
 /// This screen is for user login
@@ -112,11 +112,11 @@ class SignInScreen extends StatelessWidget {
                           icon: signInProviderValue.passwordVisibility
                               ? const Icon(
                                   EvaIcons.eyeOff,
-                                  color: Colors.black,
+                                  color: ConstantColors.constantBlackColor,
                                 )
                               : const Icon(
                                   EvaIcons.eye,
-                                  color: Colors.black,
+                                  color: ConstantColors.constantBlackColor,
                                 ),
                         ),
                         labelText: 'Password',
@@ -168,7 +168,8 @@ class SignInScreen extends StatelessWidget {
                 text: TextSpan(
                   children: [
                     const TextSpan(
-                      style: TextStyle(color: Colors.black),
+                      style:
+                          TextStyle(color: ConstantColors.constantBlackColor),
                       text: 'Don\'t have an account?',
                     ),
                     const WidgetSpan(
@@ -179,7 +180,7 @@ class SignInScreen extends StatelessWidget {
                     TextSpan(
                       text: 'Sign up',
                       style: const TextStyle(
-                        color: Colors.black,
+                        color: ConstantColors.constantBlackColor,
                         fontWeight: FontWeight.bold,
                       ),
                       recognizer: TapGestureRecognizer()
@@ -190,7 +191,8 @@ class SignInScreen extends StatelessWidget {
                             ),
                     )
                   ],
-                  style: const TextStyle(color: Colors.black),
+                  style:
+                      const TextStyle(color: ConstantColors.constantBlackColor),
                 ),
               ),
             ],

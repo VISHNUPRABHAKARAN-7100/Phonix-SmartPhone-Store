@@ -7,9 +7,10 @@ import 'package:phonix_smartphone_store/common/internet_connection.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/sign_up_screen/model/sign_up_model.dart';
 import 'package:phonix_smartphone_store/widgets/textformfield/custom_textformfield.dart';
-import 'package:phonix_smartphone_store/widgets/button/custome_button.dart';
+import 'package:phonix_smartphone_store/widgets/button/custom_button.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/constant_colors.dart';
 import '../services/sign_up_services.dart';
 
 /// This screen is for creating a new account
@@ -129,16 +130,16 @@ class SignUpScreen extends StatelessWidget {
                           keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                             labelStyle: const TextStyle(
-                              color: Colors.black,
+                              color: ConstantColors.constantBlackColor,
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
                               borderSide: const BorderSide(
-                                color: Colors.black,
+                                color: ConstantColors.constantBlackColor,
                               ),
                             ),
                             labelText: 'Email',
-                            focusColor: Colors.black,
+                            focusColor: ConstantColors.constantBlackColor,
                             border: const OutlineInputBorder(),
                           ),
                           validator: (value) {
@@ -192,11 +193,11 @@ class SignUpScreen extends StatelessWidget {
                             icon: signUpProviderValue.isPasswordVisible
                                 ? const Icon(
                                     EvaIcons.eyeOff,
-                                    color: Colors.black,
+                                    color: ConstantColors.constantBlackColor,
                                   )
                                 : const Icon(
                                     EvaIcons.eye,
-                                    color: Colors.black,
+                                    color: ConstantColors.constantBlackColor,
                                   ),
                           ),
                         ),
@@ -239,11 +240,11 @@ class SignUpScreen extends StatelessWidget {
                             icon: signUpProviderValue.isConfirmPasswordVisible
                                 ? const Icon(
                                     EvaIcons.eyeOff,
-                                    color: Colors.black,
+                                    color: ConstantColors.constantBlackColor,
                                   )
                                 : const Icon(
                                     EvaIcons.eye,
-                                    color: Colors.black,
+                                    color: ConstantColors.constantBlackColor,
                                   ),
                           ),
                         ),
@@ -287,7 +288,8 @@ class SignUpScreen extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               const TextSpan(
-                                style: TextStyle(color: Colors.black),
+                                style: TextStyle(
+                                    color: ConstantColors.constantBlackColor),
                                 text: 'Already have an account?',
                               ),
                               const WidgetSpan(
@@ -298,7 +300,7 @@ class SignUpScreen extends StatelessWidget {
                               TextSpan(
                                 text: 'Login',
                                 style: const TextStyle(
-                                  color: Colors.black,
+                                  color: ConstantColors.constantBlackColor,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 recognizer: TapGestureRecognizer()
@@ -306,7 +308,8 @@ class SignUpScreen extends StatelessWidget {
                                       .cancelButtonFunction(context),
                               )
                             ],
-                            style: const TextStyle(color: Colors.black),
+                            style: const TextStyle(
+                                color: ConstantColors.constantBlackColor),
                           ),
                         ),
                       ],

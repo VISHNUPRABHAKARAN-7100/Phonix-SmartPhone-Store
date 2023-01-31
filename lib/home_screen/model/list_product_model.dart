@@ -12,13 +12,7 @@ class ProductModel {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =   Map<String, dynamic>();
-    if (this.products != null) {
-      data['products'] = this.products!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+ 
 }
 
 class Products {
@@ -72,25 +66,7 @@ class Products {
     iV = json['__v'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =   Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['productname'] = this.productname;
-    data['price'] = this.price;
-    data['mrp'] = this.mrp;
-    data['stock'] = this.stock;
-    data['brand'] = this.brand;
-    data['category'] = this.category;
-    data['description'] = this.description;
-    data['isDeleted'] = this.isDeleted;
-    if (this.image != null) {
-      data['image'] = this.image!.map((v) => v.toJson()).toList();
-    }
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
-    return data;
-  }
+
 }
 
 class Image {
@@ -106,13 +82,7 @@ class Image {
     sId = json['_id'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =   Map<String, dynamic>();
-    data['url'] = this.url;
-    data['filename'] = this.filename;
-    data['_id'] = this.sId;
-    return data;
-  }
+
 }
 
 

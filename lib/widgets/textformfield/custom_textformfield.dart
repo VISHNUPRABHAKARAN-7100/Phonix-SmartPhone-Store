@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../utils/constant_colors.dart';
+
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
@@ -27,22 +29,22 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       inputFormatters: inputFormats,
-      cursorColor: Colors.black,
+      cursorColor: ConstantColors.constantBlackColor,
       controller: textEditingController,
       obscureText: obscureText,
       decoration: InputDecoration(
         suffixIcon: suffixIconButton,
         labelStyle: const TextStyle(
-          color: Colors.black,
+          color: ConstantColors.constantBlackColor,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(size.width * 0.02),
           borderSide: const BorderSide(
-            color: Colors.black,
+            color: ConstantColors.constantBlackColor,
           ),
         ),
         labelText: labelText,
-        focusColor: Colors.black,
+        focusColor: ConstantColors.constantBlackColor,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(size.width * 0.02)),
       ),

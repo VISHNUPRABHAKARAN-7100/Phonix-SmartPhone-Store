@@ -7,6 +7,7 @@ import 'package:phonix_smartphone_store/splash_screen/controller/splash_provider
 import 'package:provider/provider.dart';
 
 import '../../common/internet_connection.dart';
+import '../../utils/constant_colors.dart';
 
 /// This screen is for displaying the splash screen
 /// and after showing the splash screen for 3 seconds
@@ -52,7 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: ConstantColors.constantBlackColor,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

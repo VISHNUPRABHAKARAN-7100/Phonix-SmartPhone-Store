@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
+import 'package:phonix_smartphone_store/procuct_screen/view/product_screen.dart';
 import 'package:provider/provider.dart';
 
 /// This screen is used to display the details of
@@ -59,27 +60,32 @@ class HomeScreen extends StatelessWidget {
                 itemCount: productValue.productModels?.products?.length ?? 0,
                 itemBuilder: (context, index) {
                   final data = productValue.productModels?.products?[index];
-                  // print(data!.image!.first.url.toString());
-                  return Container(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: size.width * 0.01),
-                    height: size.height * 0.05,
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: size.width * 0.33,
-                          child:
-                              Image.network(data!.image!.first.url.toString()),
-                        ),
-                        Text(data.productname.toString()),
-                        Text(
-                          data.description.toString(),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(data.price.toString()),
-                      ],
+                  return GestureDetector(
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const ProductScreen(),
+                      ),
+                    ),
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: size.width * 0.01),
+                      height: size.height * 0.05,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: size.width * 0.33,
+                            child: Image.network(
+                                data!.image!.first.url.toString()),
+                          ),
+                          Text(data.productname.toString()),
+                          Text(
+                            data.description.toString(),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Text(data.price.toString()),
+                        ],
+                      ),
                     ),
                   );
                 },

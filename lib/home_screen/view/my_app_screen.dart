@@ -43,7 +43,7 @@ class MyAppScreen extends StatelessWidget {
           .selectedIndexOfBottomNvigationBar],
       bottomNavigationBar: Consumer<HomeScreenProvider>(
         builder: (context, homeProviderValue, child) => BottomNavigationBar(
-          selectedItemColor: Colors.black,
+          selectedItemColor: ConstantColors.constantBlackColor,
           selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
           currentIndex: homeProviderValue.selectedIndexOfBottomNvigationBar,
           onTap: (value) {
@@ -54,14 +54,14 @@ class MyAppScreen extends StatelessWidget {
               icon: Icon(
                 EvaIcons.homeOutline,
                 size: 30,
-                color: Colors.black,
+                color: ConstantColors.constantBlackColor,
               ),
               label: '________',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.heart,
-                color: Colors.black,
+                color: ConstantColors.constantBlackColor,
               ),
               label: '________',
             ),
@@ -69,14 +69,14 @@ class MyAppScreen extends StatelessWidget {
               icon: Icon(
                 EvaIcons.shoppingCartOutline,
                 size: 30,
-                color: Colors.black,
+                color: ConstantColors.constantBlackColor,
               ),
               label: '________',
             ),
             BottomNavigationBarItem(
               icon: Icon(
                 FontAwesomeIcons.user,
-                color: Colors.black,
+                color: ConstantColors.constantBlackColor,
               ),
               label: '________',
             ),

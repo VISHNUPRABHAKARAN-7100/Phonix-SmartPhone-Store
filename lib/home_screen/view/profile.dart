@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/constant_colors.dart';
+
 // This screen is for showing the profile screen.
 
 class Profile extends StatelessWidget {
@@ -41,17 +43,19 @@ class Profile extends StatelessWidget {
                       onPressed: () => Navigator.pop(context),
                       child: const Text(
                         'NO',
-                        style: TextStyle(color: Colors.black),
+                        style:
+                            TextStyle(color: ConstantColors.constantBlackColor),
                       ),
                     ),
                     TextButton(
-                          onPressed: () async {
+                      onPressed: () async {
                         Provider.of<ProfileProvider>(context, listen: false)
                             .logOutFunction(context);
                       },
                       child: const Text(
                         'YES',
-                        style: TextStyle(color: Colors.black),
+                        style:
+                            TextStyle(color: ConstantColors.constantBlackColor),
                       ),
                     ),
                   ],
