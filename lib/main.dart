@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => OTPProvider(),
         ),
-        
         ChangeNotifierProvider(
           create: (context) => SignUpProvider(),
         ),

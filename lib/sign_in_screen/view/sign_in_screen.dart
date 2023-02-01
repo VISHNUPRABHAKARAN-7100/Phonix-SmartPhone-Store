@@ -162,7 +162,7 @@ class SignInScreen extends StatelessWidget {
               // If the user has no account, then user can create
               // a new account by clicking the "Sign In " button.
               SizedBox(
-                height: size.height * .01,
+                height: size.height * .28,
               ),
               RichText(
                 text: TextSpan(

@@ -63,7 +63,12 @@ class HomeScreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () => Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const ProductScreen(),
+                        builder: (context) => ProductScreen(
+                          productName: data.productname.toString(),
+                          description: data.description.toString(),
+                          price: data.price.toString(),
+                          mrp: data.mrp.toString(),
+                        ),
                       ),
                     ),
                     child: Container(
@@ -76,7 +81,8 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(
                             height: size.width * 0.33,
                             child: Image.network(
-                                data!.image!.first.url.toString()),
+                              data!.image!.first.url.toString(),
+                            ),
                           ),
                           Text(data.productname.toString()),
                           Text(

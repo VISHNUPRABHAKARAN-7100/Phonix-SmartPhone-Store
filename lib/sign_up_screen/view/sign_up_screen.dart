@@ -282,7 +282,7 @@ class SignUpScreen extends StatelessWidget {
                         // if the user clicked the sign up button
                         // accidentally and wants to go back to the sign in page.
                         SizedBox(
-                          height: size.height * .01,
+                          height: size.height * .1,
                         ),
                         RichText(
                           text: TextSpan(

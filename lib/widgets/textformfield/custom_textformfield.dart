@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../utils/constant_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -22,6 +21,7 @@ class CustomTextFormField extends StatelessWidget {
   final String? Function() ontap;
   final List<TextInputFormatter>? inputFormats;
   final TextInputType? keyboardType;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,6 @@ class CustomTextFormField extends StatelessWidget {
         ),
       ),
       validator: (String? value) {
-        // ontap();
         return ontap();
       },
     );
