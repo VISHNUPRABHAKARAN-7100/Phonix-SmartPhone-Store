@@ -27,7 +27,6 @@ class HomeScreenProvider with ChangeNotifier {
   void getDataOfProducts(BuildContext context) async {
     productModels = await ProductServices().fetchDataOfProduct(context);
     notifyListeners();
-    
   }
 
   // Function to get data from API of Banner
@@ -38,3 +37,19 @@ class HomeScreenProvider with ChangeNotifier {
     // print(bannerModels?.couponName.toString());
   }
 }
+
+
+/*
+ SizedBox(
+              width: size.width,
+              height: size.height * .2,
+              child: Image(
+                fit: BoxFit.cover,
+                image: NetworkImage(productValue
+                    .bannerModels!.banner.first.image.first.url
+                    .toString()),
+              ),
+            ),
+
+
+*/

@@ -134,7 +134,7 @@ class SignUpScreen extends StatelessWidget {
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.0),
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                 color: ConstantColors.constantBlackColor,
                               ),
                             ),

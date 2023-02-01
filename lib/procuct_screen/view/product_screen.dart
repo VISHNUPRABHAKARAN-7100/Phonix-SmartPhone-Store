@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
+import 'package:phonix_smartphone_store/widgets/button/custom_button.dart';
 
 /// This screen is used to display the each
 /// product information
@@ -7,16 +9,10 @@ import 'package:phonix_smartphone_store/utils/constant_colors.dart';
 class ProductScreen extends StatelessWidget {
   const ProductScreen({
     super.key,
-    required this.productName,
-    required this.description,
-    required this.price,
-    required this.mrp,
+    required this.products,
   });
 
-  final String productName;
-  final String description;
-  final String price;
-  final String mrp;
+  final Products products;
 
   @override
   Widget build(BuildContext context) {
@@ -30,67 +26,101 @@ class ProductScreen extends StatelessWidget {
       ),
       backgroundColor: ConstantColors.appBackgroundColor,
       body: SafeArea(
-        child: ListView(
+        child: Column(
           children: [
-            SizedBox(
-              width: 100,
-              height: size.height * 0.35,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemBuilder: (context, index) => SizedBox(
-                  width: size.width,
-                  height: size.height / 2,
-                  child: const Icon(Icons.umbrella),
-                ),
-                scrollDirection: Axis.horizontal,
-                itemCount: 20,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+            Expanded(
+              child: ListView(
                 children: [
-                  Text(
-                    productName,
-                    style: TextStyle(
-                      fontSize: size.width * 0.05,
-                    ),
-                  ),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: size.width * 0.05,
-                    ),
-                  ),
                   SizedBox(
-                    height: size.height * 0.02,
+                    width: size.width,
+                    height: size.height * 0.35,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) => SizedBox(
+                        width: size.width,
+                        height: size.height * 0.5,
+                        // child: const Icon(Icons.umbrella),
+                        child: Image.network(
+                            products.image![index].url.toString()),
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: products.image!.length,
+                    ),
                   ),
-                  RichText(
-                    text: TextSpan(
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextSpan(
-                          text: '₹$price',
-                          style: const TextStyle(color: Colors.black),
+                        Text(
+                          products.productname.toString(),
+                          style: TextStyle(
+                            fontSize: size.width * 0.05,
+                          ),
                         ),
-                        const WidgetSpan(
-                          alignment: PlaceholderAlignment.baseline,
-                          baseline: TextBaseline.alphabetic,
-                          child: SizedBox(width: 8),
+                        SizedBox(
+                          height: size.height * 0.01,
                         ),
-                        const TextSpan(
-                          text: 'MRP ',
-                          style: TextStyle(color: Colors.black),
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '₹${products.price}',
+                                style: const TextStyle(
+                                    color: ConstantColors.constantBlackColor),
+                              ),
+                              const WidgetSpan(
+                                alignment: PlaceholderAlignment.baseline,
+                                baseline: TextBaseline.alphabetic,
+                                child: SizedBox(width: 8),
+                              ),
+                              const TextSpan(
+                                text: 'MRP ',
+                                style: TextStyle(
+                                    color: ConstantColors.constantBlackColor),
+                              ),
+                              TextSpan(
+                                text: ' ₹${products.mrp}',
+                                style: const TextStyle(
+                                  color: ConstantColors.constantBlackColor,
+                                  decoration: TextDecoration.lineThrough,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        TextSpan(
-                          text: ' ₹$mrp',
-                          style: const TextStyle(
-                            color: Colors.black,
-                            decoration: TextDecoration.lineThrough,
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        Text(
+                          products.description.toString(),
+                          style: TextStyle(
+                            fontSize: size.width * 0.05,
                           ),
                         ),
                       ],
                     ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+              height: size.height * 0.07,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.favorite_border_outlined),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: ConstantColors.constantBlackColor,
+                    ),
+                    child: const Text('Add to Cart'),
                   )
                 ],
               ),

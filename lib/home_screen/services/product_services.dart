@@ -13,7 +13,6 @@ class ProductServices {
       if (response.statusCode == 200) {
         //  Provider.of<HomeScreenProvider>(context).changeShimmerValue(false);
         ProductModel productModel = ProductModel.fromJson(response.data);
-        
         return productModel;
       } else {
         return null;
@@ -24,4 +23,6 @@ class ProductServices {
     }
     return null;
   }
+
+  
 }

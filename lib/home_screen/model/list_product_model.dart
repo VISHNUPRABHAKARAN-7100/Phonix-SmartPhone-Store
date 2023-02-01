@@ -11,8 +11,6 @@ class ProductModel {
       });
     }
   }
-
- 
 }
 
 class Products {
@@ -25,7 +23,7 @@ class Products {
   String? category;
   String? description;
   bool? isDeleted;
-  List<Image>? image;
+  List<ImageModel>? image;
   String? createdAt;
   String? updatedAt;
   int? iV;
@@ -56,9 +54,9 @@ class Products {
     description = json['description'];
     isDeleted = json['isDeleted'];
     if (json['image'] != null) {
-      image = <Image>[];
+      image = <ImageModel>[];
       json['image'].forEach((v) {
-        image!.add(  Image.fromJson(v));
+        image!.add(  ImageModel.fromJson(v));
       });
     }
     createdAt = json['createdAt'];
@@ -69,134 +67,17 @@ class Products {
 
 }
 
-class Image {
+class ImageModel {
   String? url;
   String? filename;
   String? sId;
 
-  Image({this.url, this.filename, this.sId});
+  ImageModel({this.url, this.filename, this.sId});
 
-  Image.fromJson(Map<String, dynamic> json) {
+  ImageModel.fromJson(Map<String, dynamic> json) {
     url = json['url'];
     filename = json['filename'];
     sId = json['_id'];
   }
-
-
 }
 
-
-// class Product {
-//   Product({
-//     this.products,
-//   });
-//   Product.fromJson(dynamic json) {
-//     if (json['products'] != null) {
-//       products = [];
-//       json['products'].forEach((v) {
-//         products?.add(Products.fromJson(v));
-//       });
-//     }
-//   }
-//   List<Products>? products;
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     if (products != null) {
-//       map['products'] = products?.map((v) => v.toJson()).toList();
-//     }
-//     return map;
-//   }
-// }
-
-// class Products {
-//   Products({
-//     this.id,
-//     this.productname,
-//     this.price,
-//     this.mrp,
-//     this.stock,
-//     this.brand,
-//     this.category,
-//     this.description,
-//     this.isDeleted,
-//     this.image,
-//     this.createdAt,
-//     this.updatedAt,
-//     this.v,
-//   });
-//   Products.fromJson(dynamic json) {
-//     id = json['_id'];
-//     productname = json['productname'];
-//     price = json['price'];
-//     mrp = json['mrp'];
-//     stock = json['stock'];
-//     brand = json['brand'];
-//     category = json['category'];
-//     description = json['description'];
-//     isDeleted = json['isDeleted'];
-//     if (json['image'] != null) {
-//       image = [];
-//       json['image'].forEach((v) {
-//         image?.add(Image.fromJson(v));
-//       });
-//     }
-//     createdAt = json['createdAt'];
-//     updatedAt = json['updatedAt'];
-//     v = json['__v'];
-//   }
-//   String? id;
-//   String? productname;
-//   int? price;
-//   int? mrp;
-//   int? stock;
-//   String? brand;
-//   String? category;
-//   String? description;
-//   bool? isDeleted;
-//   List<Image>? image;
-//   String? createdAt;
-//   String? updatedAt;
-//   int? v;
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['_id'] = id;
-//     map['productname'] = productname;
-//     map['price'] = price;
-//     map['mrp'] = mrp;
-//     map['stock'] = stock;
-//     map['brand'] = brand;
-//     map['category'] = category;
-//     map['description'] = description;
-//     map['isDeleted'] = isDeleted;
-//     if (image != null) {
-//       map['image'] = image?.map((v) => v.toJson()).toList();
-//     }
-//     map['createdAt'] = createdAt;
-//     map['updatedAt'] = updatedAt;
-//     map['__v'] = v;
-//     return map;
-//   }
-// }
-
-// class Image {
-//   Image({
-//     this.url,
-//     this.filename,
-//     this.id,
-//   });
-//   Image.fromJson(dynamic json) {
-//     url = json['url'];
-//     filename = json['filename'];
-//     id = json['_id'];
-//   }
-//   String? url;
-//   String? filename;
-//   String? id;
-//   Map<String, dynamic> toJson() {
-//     final map = <String, dynamic>{};
-//     map['url'] = url;
-//     map['filename'] = filename;
-//     map['_id'] = id;
-//     return map;
-//   }
-// }

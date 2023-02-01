@@ -111,7 +111,7 @@ class WishListScreen extends StatelessWidget {
                         GestureDetector(
                           child: Container(
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: ConstantColors.constantBlackColor,
                               borderRadius:
                                   BorderRadius.circular(size.width * 0.02),
                               border: Border.all(),
