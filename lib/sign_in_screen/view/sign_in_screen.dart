@@ -1,7 +1,6 @@
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/model/sign_in_model.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/services/sign_in_services.dart';
@@ -19,6 +18,7 @@ import '../controller/sign_in_provider.dart';
 /// and if the user has no account then
 /// user can create a new account using the
 /// sign up button.
+
 class SignInScreen extends StatelessWidget {
   SignInScreen({super.key});
 
@@ -79,24 +79,20 @@ class SignInScreen extends StatelessWidget {
                         obscureText: false,
                         textEditingController:
                             signInProviderValue.mobileNumberController,
-                        labelText: 'Phone Number',
+                        labelText: 'Email or Phone Number',
                         ontap: () {
                           if (signInProviderValue
                               .mobileNumberController.text.isEmpty) {
-                            return "Phone number is required";
+                            return "Feild is required";
                           }
-                          if (signInProviderValue
+                          
+                         else if (signInProviderValue
                                   .mobileNumberController.text.length <
                               10) {
-                            return 'Enter a valid phone number';
+                            return 'Enter a valid Email or Phone Number';
                           }
                           return null;
                         },
-                        inputFormats: [
-                          LengthLimitingTextInputFormatter(10),
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                        keyboardType: TextInputType.number,
                       ),
 
                       SizedBox(
@@ -149,8 +145,8 @@ class SignInScreen extends StatelessWidget {
                     if (formGlobalKey.currentState!.validate()) {
                       FocusScope.of(context).unfocus();
                       final signInModelObject = SignInModel(
-                        mobileNumber: int.parse(
-                            signInProviderValue.mobileNumberController.text),
+                        mobileNumber: 
+                            signInProviderValue.mobileNumberController.text,
                         password: signInProviderValue.passwordController.text,
                       );
                       SignInService.signIn(signInModelObject, context);

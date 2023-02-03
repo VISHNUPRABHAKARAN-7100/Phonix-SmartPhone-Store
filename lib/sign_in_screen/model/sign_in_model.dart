@@ -10,7 +10,7 @@ class SignInModel {
         required this.password,
     });
 
-    int mobileNumber;
+    String mobileNumber;
     String password;
 
     factory SignInModel.fromJson(Map<String, dynamic> json) => SignInModel(
