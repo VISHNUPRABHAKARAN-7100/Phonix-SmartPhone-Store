@@ -16,4 +16,7 @@ class Urls {
 
   // API url for showing the banner.
   static String banner = "/banner";
+
+  // API url for wishlist.
+  static String wishlist = "/wishlist";
 }

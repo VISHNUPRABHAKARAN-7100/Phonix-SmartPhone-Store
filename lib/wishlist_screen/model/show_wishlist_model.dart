@@ -94,7 +94,7 @@ class ProductId {
     String category;
     String description;
     bool isDeleted;
-    List<ImagesInTheWish> image;
+    List<Image> image;
     DateTime createdAt;
     DateTime updatedAt;
     int v;
@@ -109,7 +109,7 @@ class ProductId {
         category: json["category"],
         description: json["description"],
         isDeleted: json["isDeleted"],
-        image: List<ImagesInTheWish>.from(json["image"].map((x) => ImagesInTheWish.fromJson(x))),
+        image: List<Image>.from(json["image"].map((x) => Image.fromJson(x))),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
@@ -132,8 +132,8 @@ class ProductId {
     };
 }
 
-class ImagesInTheWish {
-    ImagesInTheWish({
+class Image {
+    Image({
         required this.url,
         required this.filename,
         required this.id,
@@ -143,7 +143,7 @@ class ImagesInTheWish {
     String filename;
     String id;
 
-    factory ImagesInTheWish.fromJson(Map<String, dynamic> json) => ImagesInTheWish(
+    factory Image.fromJson(Map<String, dynamic> json) => Image(
         url: json["url"],
         filename: json["filename"],
         id: json["_id"],

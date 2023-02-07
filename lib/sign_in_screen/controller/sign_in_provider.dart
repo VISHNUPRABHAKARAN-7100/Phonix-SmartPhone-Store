@@ -5,7 +5,7 @@ class SignInProvider extends ChangeNotifier {
 
   bool passwordVisibility = true;
 
-  String? globalUserId;
+
 
   // Variable for showing the loader
   bool showLoader = false;
@@ -21,7 +21,5 @@ class SignInProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  assigingUserId(String userId) {
-    globalUserId = userId;
-  }
+ 
 }

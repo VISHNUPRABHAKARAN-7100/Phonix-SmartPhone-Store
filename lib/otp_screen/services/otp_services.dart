@@ -6,8 +6,6 @@ import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provid
 import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../home_screen/view/my_app_screen.dart';
 import '../../sign_up_screen/controller/sign_up_provider.dart';
 import '../../widgets/snackbar/snackbar.dart';
 

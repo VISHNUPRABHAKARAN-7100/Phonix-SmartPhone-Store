@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/view/shimmer_widget.dart';
 import 'package:phonix_smartphone_store/procuct_screen/view/product_screen.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/controller/wishlist_provider.dart';
 import 'package:provider/provider.dart';
 
 /// This screen is used to display the details of
@@ -33,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                       fit: BoxFit.cover,
                       image: NetworkImage(productValue
                           .bannerModels!.banner.first.image.first.url
-                          .toString()),
+                          .toString(),),
                     ),
                   ),
                   SizedBox(

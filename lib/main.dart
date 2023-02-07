@@ -6,6 +6,7 @@ import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provid
 import 'package:phonix_smartphone_store/sign_up_screen/controller/sign_up_provider.dart';
 import 'package:phonix_smartphone_store/splash_screen/controller/splash_provider.dart';
 import 'package:phonix_smartphone_store/splash_screen/view/splash_screen.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/controller/wishlist_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -36,6 +37,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => ProfileProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => WishListProvider(),
         ),
       ],
       child: const MaterialApp(

@@ -31,9 +31,8 @@ class SignInService {
             await SharedPreferences.getInstance();
         sharedPreferences.setString('userId', response.data["userId"]);
 
-        final userId = sharedPreferences.getString('userId');
-        Provider.of<SignInProvider>(context, listen: false)
-            .assigingUserId(userId.toString());
+       
+       
 
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(

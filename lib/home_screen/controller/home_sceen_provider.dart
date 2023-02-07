@@ -34,22 +34,6 @@ class HomeScreenProvider with ChangeNotifier {
   void getBanner(BuildContext context) async {
     bannerModels = await BannerServices().getBannerService(context);
     notifyListeners();
-    // print(bannerModels?.couponName.toString());
   }
 }
 
-
-/*
- SizedBox(
-              width: size.width,
-              height: size.height * .2,
-              child: Image(
-                fit: BoxFit.cover,
-                image: NetworkImage(productValue
-                    .bannerModels!.banner.first.image.first.url
-                    .toString()),
-              ),
-            ),
-
-
-*/
