@@ -25,18 +25,23 @@ class SignInService {
     );
     try {
       var response = await Dio()
-          .post(Urls.baseUrl + Urls.userLogin, data: signInModel.toJson());
+          .post('${Urls.baseUrl}${Urls.userLogin}', data: signInModel.toJson());
       if (response.statusCode == 200) {
+        final SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString('userId', response.data["userId"]);
+
+        final userId = sharedPreferences.getString('userId');
+        Provider.of<SignInProvider>(context, listen: false)
+            .assigingUserId(userId.toString());
+
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
               builder: (context) => const MyAppScreen(),
             ),
             (route) => false);
+        log(response.data["userId"].toString());
 
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString(
-            'mobileNumber', signInModel.mobileNumber.toString());
         Provider.of<SignInProvider>(context, listen: false)
             .mobileNumberController
             .clear();
@@ -67,7 +72,6 @@ class SignInService {
           color: Colors.red,
         );
       }
-      log(e.toString());
     }
   }
 }

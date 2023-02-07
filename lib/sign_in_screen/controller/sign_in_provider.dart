@@ -5,6 +5,8 @@ class SignInProvider extends ChangeNotifier {
 
   bool passwordVisibility = true;
 
+  String? globalUserId;
+
   // Variable for showing the loader
   bool showLoader = false;
 
@@ -13,12 +15,13 @@ class SignInProvider extends ChangeNotifier {
   final mobileNumberController = TextEditingController();
   final passwordController = TextEditingController();
 
-
 // This function is for making the obscureText make true and false.
   void setPasswordVisibility() {
     passwordVisibility = !passwordVisibility;
     notifyListeners();
   }
 
-  
+  assigingUserId(String userId) {
+    globalUserId = userId;
+  }
 }

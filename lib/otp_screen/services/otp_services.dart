@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
 import 'package:phonix_smartphone_store/sign_in_screen/controller/sign_in_provider.dart';
+import 'package:phonix_smartphone_store/sign_in_screen/view/sign_in_screen.dart';
 import 'package:phonix_smartphone_store/utils/url.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,13 +35,12 @@ class OtpServices {
       if (response.statusCode == 200) {
         Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => const MyAppScreen(),
+              builder: (context) => SignInScreen(),
             ),
             (route) => false);
+        log('Sign up${response.data}');
 
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString('mobileNumber', mobileNumber);
+        
 
         Provider.of<SignUpProvider>(context, listen: false)
             .nameEditingController

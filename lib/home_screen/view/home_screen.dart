@@ -3,7 +3,6 @@ import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provid
 import 'package:phonix_smartphone_store/home_screen/view/shimmer_widget.dart';
 import 'package:phonix_smartphone_store/procuct_screen/view/product_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shimmer/shimmer.dart';
 
 /// This screen is used to display the details of
 /// new products.

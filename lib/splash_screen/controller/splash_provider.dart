@@ -6,7 +6,7 @@ class SplashProvider extends ChangeNotifier {
   Future getValidation() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    var obtainedMobileNumber = sharedPreferences.getString('mobileNumber');
+    var obtainedMobileNumber = sharedPreferences.getString('userId');
        finalMobielNumber = obtainedMobileNumber;
   }
 }

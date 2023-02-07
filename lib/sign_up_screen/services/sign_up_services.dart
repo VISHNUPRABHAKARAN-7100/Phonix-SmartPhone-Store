@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/exception/dio_exceptions.dart';
@@ -25,6 +26,7 @@ class SignUpServices {
       Response response = await Dio()
           .post(Urls.baseUrl + Urls.registerNewUser, data: model.toJson());
       if (response.statusCode == 200) {
+        log('Sign up${response.data}');
         Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => OTPScreen(

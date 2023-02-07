@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
-import 'package:phonix_smartphone_store/widgets/button/custom_button.dart';
 
 /// This screen is used to display the each
 /// product information
