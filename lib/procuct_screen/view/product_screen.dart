@@ -1,6 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/controller/wishlist_provider.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/services/wish_list_services.dart';
+import 'package:provider/provider.dart';
 
 /// This screen is used to display the each
 /// product information
@@ -40,7 +45,8 @@ class ProductScreen extends StatelessWidget {
                         height: size.height * 0.5,
                         // child: const Icon(Icons.umbrella),
                         child: Image.network(
-                            products.image![index].url.toString()),
+                          products.image![index].url.toString(),
+                        ),
                       ),
                       scrollDirection: Axis.horizontal,
                       itemCount: products.image!.length,
@@ -65,22 +71,27 @@ class ProductScreen extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: '₹${products.price}',
-                                style: const TextStyle(
-                                    color: ConstantColors.constantBlackColor),
+                                style: TextStyle(
+                                  fontSize: size.width * 0.05,
+                                  color: ConstantColors.constantBlackColor,
+                                ),
                               ),
                               const WidgetSpan(
                                 alignment: PlaceholderAlignment.baseline,
                                 baseline: TextBaseline.alphabetic,
                                 child: SizedBox(width: 8),
                               ),
-                              const TextSpan(
+                              TextSpan(
                                 text: 'MRP ',
                                 style: TextStyle(
-                                    color: ConstantColors.constantBlackColor),
+                                  fontSize: size.width * 0.05,
+                                  color: ConstantColors.constantBlackColor,
+                                ),
                               ),
                               TextSpan(
                                 text: ' ₹${products.mrp}',
-                                style: const TextStyle(
+                                style: TextStyle(
+                                  fontSize: size.width * 0.05,
                                   color: ConstantColors.constantBlackColor,
                                   decoration: TextDecoration.lineThrough,
                                 ),
@@ -111,7 +122,9 @@ class ProductScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      WishlistService().addToWishlist(products.sId.toString());
+                    },
                     icon: const Icon(Icons.favorite_border_outlined),
                   ),
                   ElevatedButton(

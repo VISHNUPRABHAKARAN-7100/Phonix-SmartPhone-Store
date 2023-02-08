@@ -8,8 +8,22 @@ class WishlistService {
   final dio = Dio();
   // Function to add products to the wishlist.
 
-  void addToWishlist(String id) async {
-    // Response response = await dio.post(path)
+  void addToWishlist(String productId) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    String? userId = sharedPreferences.getString('userId');
+    log(Urls.baseUrl +
+        Urls.wishlist +
+        Urls.addtowishlist +'/'+
+        userId.toString() +'/'+
+        productId);
+
+    Response response = await dio
+        .get(Urls.baseUrl +
+        Urls.wishlist +
+        Urls.addtowishlist +'/'+
+        userId.toString() +'/'+
+        productId);
   }
 
   Future<ShowWishListModel?> getWishList(context) async {
@@ -22,7 +36,7 @@ class WishlistService {
     try {
       Response response =
           await dio.get('${Urls.baseUrl}${Urls.wishlist}/$userId');
-      log(response.data.toString());
+      // log(response.data.toString());
       if (response.statusCode == 200) {
         ShowWishListModel showWishListModel =
             ShowWishListModel.fromJson(response.data);
