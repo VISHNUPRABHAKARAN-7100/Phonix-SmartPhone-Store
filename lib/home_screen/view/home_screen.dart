@@ -24,17 +24,9 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Consumer<HomeScreenProvider>(
       builder: (context, productValue, child) {
-        // print(productValue.bannerModels?.image.first.url.toString());
         return productValue.bannerModels != null
             ? ListView(
-                // crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Provider.of<WishListProvider>(context, listen: false)
-                            .getDataOfWishList(context);
-                      },
-                      child: Text('ah')),
                   SizedBox(
                     width: size.width,
                     height: size.height * .2,
@@ -108,7 +100,8 @@ class HomeScreen extends StatelessWidget {
                                     Text(
                                       '₹ ${data.price}',
                                       style: TextStyle(
-                                          fontSize: size.width * 0.05),
+                                        fontSize: size.width * 0.05,
+                                      ),
                                     ),
                                   ],
                                 ),

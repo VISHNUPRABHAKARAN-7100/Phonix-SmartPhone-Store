@@ -22,4 +22,7 @@ class Urls {
 
   // API url for addtowishlist
   static String addtowishlist = "/addtowishlist";
+
+  // API url for deletetowishlist
+  static String delFromwishlist = "/delfromwishlist";
 }

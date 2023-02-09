@@ -6,37 +6,36 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class WishlistService {
   final dio = Dio();
-  // Function to add products to the wishlist.
 
+
+  // Function to add products to the wishlist.
   void addToWishlist(String productId) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString('userId');
-    log(Urls.baseUrl +
-        Urls.wishlist +
-        Urls.addtowishlist +'/'+
-        userId.toString() +'/'+
-        productId);
 
-    Response response = await dio
-        .get(Urls.baseUrl +
-        Urls.wishlist +
-        Urls.addtowishlist +'/'+
-        userId.toString() +'/'+
-        productId);
+    Response response = await dio.get(
+        '${Urls.baseUrl}${Urls.wishlist}${Urls.addtowishlist}/$userId/$productId');
+  }
+
+// Function to delete a product from the wishlist.
+  void deleteProductFromWishlist(String productId) async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    String? userId = sharedPreferences.getString('userId');
+
+    Response response = await dio.get(
+        '${Urls.baseUrl}${Urls.wishlist}${Urls.delFromwishlist}/$userId/$productId');
   }
 
   Future<ShowWishListModel?> getWishList(context) async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     String? userId = sharedPreferences.getString('userId');
-    // log(userId.toString());
-    // log(Urls.baseUrl + Urls.wishlist + '/' + userId.toString());
 
     try {
       Response response =
           await dio.get('${Urls.baseUrl}${Urls.wishlist}/$userId');
-      // log(response.data.toString());
       if (response.statusCode == 200) {
         ShowWishListModel showWishListModel =
             ShowWishListModel.fromJson(response.data);
