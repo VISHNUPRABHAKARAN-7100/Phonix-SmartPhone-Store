@@ -134,14 +134,13 @@ class WishListScreen extends StatelessWidget {
                                   width: size.height * 0.050,
                                   child: IconButton(
                                     onPressed: () {
-                                      WishlistService()
-                                          .deleteProductFromWishlist(
-                                              wishListProviderValue
-                                                  .wishList[0]
-                                                  .wishlist
-                                                  .items[index]
-                                                  .productId
-                                                  .id);
+                                      wishListProviderValue.removeFromWishList(
+                                          wishListProviderValue
+                                              .wishList[0]
+                                              .wishlist
+                                              .items[index]
+                                              .productId
+                                              .id);
                                     },
                                     icon: const Icon(
                                       Icons.delete_outline_outlined,

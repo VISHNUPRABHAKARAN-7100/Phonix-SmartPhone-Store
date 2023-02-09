@@ -1,7 +1,13 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
+import 'package:phonix_smartphone_store/wishlist_screen/controller/wishlist_provider.dart';
 import 'package:phonix_smartphone_store/wishlist_screen/services/wish_list_services.dart';
+import 'package:provider/provider.dart';
 
 /// This screen is used to display the each
 /// product information
@@ -16,6 +22,7 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsFlutterBinding.ensureInitialized();
     // Variable to find the size of the device.
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -31,6 +38,12 @@ class ProductScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       Provider.of<WishListProvider>(context, listen: false)
+                  //           .check(products.sId);
+                  //     },
+                  //     child: const Text('ash')),
                   SizedBox(
                     width: size.width,
                     height: size.height * 0.35,
@@ -39,7 +52,6 @@ class ProductScreen extends StatelessWidget {
                       itemBuilder: (context, index) => SizedBox(
                         width: size.width,
                         height: size.height * 0.5,
-                        // child: const Icon(Icons.umbrella),
                         child: Image.network(
                           products.image![index].url.toString(),
                         ),
@@ -118,11 +130,26 @@ class ProductScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   IconButton(
-                    onPressed: () {
-                      WishlistService().addToWishlist(products.sId.toString());
-                    },
-                    icon: const Icon(Icons.favorite_border_outlined),
-                  ),
+                      onPressed: () async {
+                        if (Provider.of<WishListProvider>(context,
+                                    listen: false)
+                                .isInWishlist ==
+                            true) {
+                          await Provider.of<WishListProvider>(context,
+                                  listen: false)
+                              .addProductToWishlist(products.sId.toString());
+                        }
+
+                        await Provider.of<WishListProvider>(context,
+                                listen: false)
+                            .check(products.sId.toString());
+                      },
+                      icon:
+                          Provider.of<WishListProvider>(context).isInWishlist ==
+                                  true
+                              ? const Icon(Icons.favorite_border_outlined)
+                              : const Icon(Icons.favorite_rounded,
+                                  color: ConstantColors.constantRedColor)),
                   ElevatedButton(
                     onPressed: () {},
                     style: ElevatedButton.styleFrom(
@@ -132,7 +159,7 @@ class ProductScreen extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),
