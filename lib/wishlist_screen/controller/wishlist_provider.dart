@@ -16,32 +16,22 @@ class WishListProvider with ChangeNotifier {
   }
 
   // Function to remove a project from the wish list
-  removeFromWishList(dynamic productId) async {
+  removeFromWishList(String productId,context) async {
     await WishlistService().deleteProductFromWishlist(productId);
-    // for (var i = 0; i < wishList[0].wishlist.items.length; i++) {
-    wishList.removeWhere(
-        (wishlist) => wishlist.wishlist.items[0].productId.id == productId);
+    if (wishList.isNotEmpty) {
+      wishList.removeWhere(
+          (wishlist) => wishlist.wishlist.items[0].productId.id == productId);
+     await getDataOfWishList(context);
+    }
     notifyListeners();
-    // }
   }
-
-  // bool checkingWishlist(dynamic productId) {
-  //   bool isInWishlist = false;
-  //   for (var i = 0; i < wishList[0].wishlist.items.length;) {
-  //     if (wishList[0].wishlist.items[i].productId.id == productId) {
-  //       isInWishlist = true;
-  //       break;
-  //     }
-  //   }
-  //   return isInWishlist;
-  // }
 
   addProductToWishlist(String productId) async {
     await WishlistService().addToWishlist(productId);
     notifyListeners();
   }
 
-  bool check(productId)  {
+  bool check(productId) {
     bool isInWishlist = false;
     for (var i = 0; i < wishList[0].wishlist.items.length; i++) {
       if (wishList[0].wishlist.items[0].productId.id.contains(productId)) {
@@ -52,7 +42,7 @@ class WishListProvider with ChangeNotifier {
       // notifyListeners();
     }
     return isInWishlist;
-    
+
     // notifyListeners();
   }
 }

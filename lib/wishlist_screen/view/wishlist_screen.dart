@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
 import 'package:phonix_smartphone_store/wishlist_screen/controller/wishlist_provider.dart';
@@ -140,7 +142,8 @@ class WishListScreen extends StatelessWidget {
                                               .wishlist
                                               .items[index]
                                               .productId
-                                              .id);
+                                              .id,
+                                          context);
                                     },
                                     icon: const Icon(
                                       Icons.delete_outline_outlined,

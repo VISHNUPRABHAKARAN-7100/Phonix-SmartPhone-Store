@@ -1,7 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:phonix_smartphone_store/home_screen/model/list_product_model.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
@@ -139,7 +135,7 @@ class ProductScreen extends StatelessWidget {
                             ? () {
                                 wishListProviderValueOfButton
                                     .removeFromWishList(
-                                        products.sId.toString());
+                                        products.sId.toString(),context);
                                 wishListProviderValueOfButton
                                     .getDataOfWishList(context);
                               }
