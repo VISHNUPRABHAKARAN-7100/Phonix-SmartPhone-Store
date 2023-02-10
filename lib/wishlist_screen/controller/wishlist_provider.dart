@@ -41,24 +41,18 @@ class WishListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  getBool(products) {
-    check(products);
-    notifyListeners();
-  }
-
-  bool isInWishlist = false;
-  Future check(productId) async {
+  bool check(productId)  {
+    bool isInWishlist = false;
     for (var i = 0; i < wishList[0].wishlist.items.length; i++) {
       if (wishList[0].wishlist.items[0].productId.id.contains(productId)) {
         isInWishlist = true;
-        notifyListeners();
-      } else {
-        isInWishlist = false;
-        notifyListeners();
+        break;
+        // notifyListeners();
       }
-      notifyListeners();
+      // notifyListeners();
     }
-
-    notifyListeners();
+    return isInWishlist;
+    
+    // notifyListeners();
   }
 }

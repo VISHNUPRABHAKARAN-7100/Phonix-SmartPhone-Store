@@ -22,6 +22,8 @@ class ProductScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<WishListProvider>(context, listen: false)
+        .check(products.sId.toString());
     WidgetsFlutterBinding.ensureInitialized();
     // Variable to find the size of the device.
     Size size = MediaQuery.of(context).size;
@@ -122,42 +124,47 @@ class ProductScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              decoration: BoxDecoration(border: Border.all()),
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
-              height: size.height * 0.07,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                      onPressed: () async {
-                        if (Provider.of<WishListProvider>(context,
-                                    listen: false)
-                                .isInWishlist ==
-                            true) {
-                          await Provider.of<WishListProvider>(context,
-                                  listen: false)
-                              .addProductToWishlist(products.sId.toString());
-                        }
-
-                        await Provider.of<WishListProvider>(context,
-                                listen: false)
-                            .check(products.sId.toString());
-                      },
-                      icon:
-                          Provider.of<WishListProvider>(context).isInWishlist ==
-                                  true
-                              ? const Icon(Icons.favorite_border_outlined)
-                              : const Icon(Icons.favorite_rounded,
-                                  color: ConstantColors.constantRedColor)),
-                  ElevatedButton(
-                    onPressed: () {},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: ConstantColors.constantBlackColor,
-                    ),
-                    child: const Text('Add to Cart'),
-                  )
-                ],
+            Consumer<WishListProvider>(
+              builder: (context, wishListProviderValueOfButton, child) =>
+                  Container(
+                decoration: BoxDecoration(border: Border.all()),
+                padding: EdgeInsets.symmetric(horizontal: size.width * 0.07),
+                height: size.height * 0.07,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IconButton(
+                        onPressed: wishListProviderValueOfButton
+                                .check(products.sId.toString())
+                            ? () {
+                                wishListProviderValueOfButton
+                                    .removeFromWishList(
+                                        products.sId.toString());
+                                wishListProviderValueOfButton
+                                    .getDataOfWishList(context);
+                              }
+                            : () {
+                                Provider.of<WishListProvider>(context,
+                                        listen: false)
+                                    .addProductToWishlist(
+                                        products.sId.toString());
+                                wishListProviderValueOfButton
+                                    .getDataOfWishList(context);
+                              },
+                        icon: wishListProviderValueOfButton
+                                .check(products.sId.toString())
+                            ? const Icon(Icons.favorite_rounded,
+                                color: ConstantColors.constantRedColor)
+                            : const Icon(Icons.favorite_border_outlined)),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: ConstantColors.constantBlackColor,
+                      ),
+                      child: const Text('Add to Cart'),
+                    )
+                  ],
+                ),
               ),
             ),
           ],
