@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:phonix_smartphone_store/address_screen/view/add_new_address_screen.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
-
 
 /// This screen is used to display the addresses of the
 /// user and user can add a new address.
@@ -38,7 +38,11 @@ class AddressScreen extends StatelessWidget {
                 height: size.height * 0.05,
                 child: GestureDetector(
                   onTap: () {
-                    print('Addresss added');
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>  AddNewAddress(),
+                      ),
+                    );
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

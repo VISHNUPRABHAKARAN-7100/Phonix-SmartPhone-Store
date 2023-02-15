@@ -34,12 +34,6 @@ class CartProvider with ChangeNotifier {
   }
 
   void handlePaymentErrorResponse(PaymentFailureResponse response, context) {
-    /*
-    * PaymentFailureResponse contains three values:
-    * 1. Error Code
-    * 2. Error Description
-    * 3. Metadata
-    * */
     showAlertDialog(context, "Payment Failed",
         "Code: ${response.code}\nDescription: ${response.message}\nMetadata:${response.error.toString()}");
   }
@@ -50,14 +44,7 @@ class CartProvider with ChangeNotifier {
           builder: (context) => const OrderScreen(),
         ),
         (route) => false);
-    /*
-    * Payment Success Response contains three values:
-    * 1. Order ID
-    * 2. Payment ID
-    * 3. Signature
-    * */
-    // showAlertDialog(
-    //     context, "Payment Successful", "Payment ID: ${response.paymentId}");
+    
   }
 
   void handleExternalWalletSelected(ExternalWalletResponse response) {
