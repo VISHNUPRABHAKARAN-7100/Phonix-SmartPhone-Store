@@ -1,10 +1,5 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/cart_sceen/controller/cart_provider.dart';
-import 'package:phonix_smartphone_store/widgets/snackbar/snackbar.dart';
-import 'package:provider/provider.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
+import '../../address_screen/view/adrdress_screen.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});
@@ -126,8 +121,13 @@ class Cart extends StatelessWidget {
                 const Text('Total Amount'),
                 ElevatedButton(
                   onPressed: () {
-                    Provider.of<CartProvider>(context, listen: false)
-                        .paymetButton(context);
+                    // Provider.of<CartProvider>(context, listen: false)
+                    //     .paymetButton(context);
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const AddressScreen(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
