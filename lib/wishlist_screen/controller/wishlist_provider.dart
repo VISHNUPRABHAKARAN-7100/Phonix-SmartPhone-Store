@@ -16,12 +16,12 @@ class WishListProvider with ChangeNotifier {
   }
 
   // Function to remove a project from the wish list
-  removeFromWishList(String productId,context) async {
+  removeFromWishList(String productId, context) async {
     await WishlistService().deleteProductFromWishlist(productId);
     if (wishList.isNotEmpty) {
       wishList.removeWhere(
           (wishlist) => wishlist.wishlist.items[0].productId.id == productId);
-     await getDataOfWishList(context);
+      await getDataOfWishList(context);
     }
     notifyListeners();
   }
@@ -31,13 +31,13 @@ class WishListProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  bool check(productId) {
+  bool checkProductIsInTheWishlist(productId) {
     bool isInWishlist = false;
     for (var i = 0; i < wishList[0].wishlist.items.length; i++) {
-      if (wishList[0].wishlist.items[0].productId.id.contains(productId)) {
+      if (wishList[0].wishlist.items[i].productId.id.contains(productId)) {
         isInWishlist = true;
-        break;
         // notifyListeners();
+        break;
       }
       // notifyListeners();
     }

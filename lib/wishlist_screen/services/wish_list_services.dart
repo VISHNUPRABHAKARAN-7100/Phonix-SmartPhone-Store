@@ -19,7 +19,7 @@ class WishlistService {
     } catch (e) {
       log(e.toString());
     }
-  }
+  } 
 
 // Function to delete a product from the wishlist.
   deleteProductFromWishlist(String productId) async {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/cart_sceen/controller/cart_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/home_sceen_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
 import 'package:phonix_smartphone_store/otp_screen/controller/otp_provider.dart';
@@ -41,6 +42,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (context) => WishListProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CartProvider(),
         ),
       ],
       child: const MaterialApp(

@@ -9,17 +9,18 @@ import 'package:provider/provider.dart';
 /// product information
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({
+  ProductScreen({
     super.key,
     required this.products,
   });
 
   final Products products;
+  final ScrollController scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     Provider.of<WishListProvider>(context, listen: false)
-        .check(products.sId.toString());
+        .checkProductIsInTheWishlist(products.sId.toString());
     WidgetsFlutterBinding.ensureInitialized();
     // Variable to find the size of the device.
     Size size = MediaQuery.of(context).size;
@@ -36,26 +37,27 @@ class ProductScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  // ElevatedButton(
-                  //     onPressed: () {
-                  //       Provider.of<WishListProvider>(context, listen: false)
-                  //           .check(products.sId);
-                  //     },
-                  //     child: const Text('ash')),
                   SizedBox(
                     width: size.width,
                     height: size.height * 0.35,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => SizedBox(
-                        width: size.width,
-                        height: size.height * 0.5,
-                        child: Image.network(
-                          products.image![index].url.toString(),
+                    child: Scrollbar(
+                      controller: scrollController,
+                      thickness: 2,
+                      // thumbColor: Colors.black26,
+                      thumbVisibility: true,
+                      child: ListView.builder(
+                        controller: scrollController,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => SizedBox(
+                          width: size.width,
+                          height: size.height * 0.5,
+                          child: Image.network(
+                            products.image![index].url.toString(),
+                          ),
                         ),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: products.image!.length,
                       ),
-                      scrollDirection: Axis.horizontal,
-                      itemCount: products.image!.length,
                     ),
                   ),
                   Padding(
@@ -76,10 +78,11 @@ class ProductScreen extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: '₹${products.price}',
+                                text: ' ₹${products.mrp}',
                                 style: TextStyle(
-                                  fontSize: size.width * 0.05,
-                                  color: ConstantColors.constantBlackColor,
+                                  fontSize: size.width * 0.045,
+                                  color: Colors.grey,
+                                  decoration: TextDecoration.lineThrough,
                                 ),
                               ),
                               const WidgetSpan(
@@ -88,20 +91,19 @@ class ProductScreen extends StatelessWidget {
                                 child: SizedBox(width: 8),
                               ),
                               TextSpan(
-                                text: 'MRP ',
+                                text: '₹${products.price}',
                                 style: TextStyle(
                                   fontSize: size.width * 0.05,
                                   color: ConstantColors.constantBlackColor,
                                 ),
                               ),
-                              TextSpan(
-                                text: ' ₹${products.mrp}',
-                                style: TextStyle(
-                                  fontSize: size.width * 0.05,
-                                  color: ConstantColors.constantBlackColor,
-                                  decoration: TextDecoration.lineThrough,
-                                ),
-                              ),
+                              // TextSpan(
+                              //   text: 'MRP ',
+                              //   style: TextStyle(
+                              //     fontSize: size.width * 0.05,
+                              //     color: ConstantColors.constantBlackColor,
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -130,28 +132,29 @@ class ProductScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     IconButton(
-                        onPressed: wishListProviderValueOfButton
-                                .check(products.sId.toString())
-                            ? () {
-                                wishListProviderValueOfButton
-                                    .removeFromWishList(
-                                        products.sId.toString(),context);
-                                wishListProviderValueOfButton
-                                    .getDataOfWishList(context);
-                              }
-                            : () {
-                                Provider.of<WishListProvider>(context,
-                                        listen: false)
-                                    .addProductToWishlist(
-                                        products.sId.toString());
-                                wishListProviderValueOfButton
-                                    .getDataOfWishList(context);
-                              },
-                        icon: wishListProviderValueOfButton
-                                .check(products.sId.toString())
-                            ? const Icon(Icons.favorite_rounded,
-                                color: ConstantColors.constantRedColor)
-                            : const Icon(Icons.favorite_border_outlined)),
+                      onPressed: wishListProviderValueOfButton
+                              .checkProductIsInTheWishlist(
+                                  products.sId.toString())
+                          ? () {
+                              wishListProviderValueOfButton.removeFromWishList(
+                                  products.sId.toString(), context);
+                              wishListProviderValueOfButton
+                                  .getDataOfWishList(context);
+                            }
+                          : () {
+                              wishListProviderValueOfButton
+                                  .addProductToWishlist(
+                                      products.sId.toString());
+                              wishListProviderValueOfButton
+                                  .getDataOfWishList(context);
+                            },
+                      icon: wishListProviderValueOfButton
+                              .checkProductIsInTheWishlist(
+                                  products.sId.toString())
+                          ? const Icon(Icons.favorite_rounded,
+                              color: ConstantColors.constantRedColor)
+                          : const Icon(Icons.favorite_border_outlined),
+                    ),
                     ElevatedButton(
                       onPressed: () {},
                       style: ElevatedButton.styleFrom(
