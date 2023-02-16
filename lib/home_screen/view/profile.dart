@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
+import 'package:phonix_smartphone_store/home_screen/view/profile_title_widget.dart';
+import 'package:phonix_smartphone_store/home_screen/view/terms_and_condition_screen.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/constant_colors.dart';
 
 // This screen is for showing the profile screen.
@@ -30,6 +31,14 @@ class Profile extends StatelessWidget {
           ProfileTitleWidget(
             title: 'ADDRESS',
             onTap: () {},
+          ),
+          ProfileTitleWidget(
+            title: 'Terms & Condition',
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const TermsAndCondition(),
+              ),
+            ),
           ),
           ProfileTitleWidget(
             title: 'LOG OUT',
@@ -66,37 +75,5 @@ class Profile extends StatelessWidget {
         ],
       ),
     ));
-  }
-}
-
-class ProfileTitleWidget extends StatelessWidget {
-  const ProfileTitleWidget({
-    super.key,
-    required this.title,
-    required this.onTap,
-  });
-
-  final String title;
-  final Function() onTap;
-
-  @override
-  Widget build(context) {
-    Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height * 0.06,
-      child: GestureDetector(
-        onTap: onTap,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(fontSize: size.height * .025),
-            ),
-            const Icon(FontAwesomeIcons.angleRight),
-          ],
-        ),
-      ),
-    );
   }
 }

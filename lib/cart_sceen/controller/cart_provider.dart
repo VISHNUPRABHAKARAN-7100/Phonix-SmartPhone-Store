@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:phonix_smartphone_store/home_screen/view/home_screen.dart';
 import 'package:phonix_smartphone_store/order/view/order_screen.dart';
-import 'package:razorpay_flutter/razorpay_flutter.dart';
-import 'dart:developer';
-
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CartProvider with ChangeNotifier {

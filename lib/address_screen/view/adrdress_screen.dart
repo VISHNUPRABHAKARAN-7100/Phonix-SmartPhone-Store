@@ -13,6 +13,7 @@ class AddressScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        iconTheme: const IconThemeData(),
         elevation: 0,
         backgroundColor: ConstantColors.appBackgroundColor,
         title: Text(
@@ -40,7 +41,7 @@ class AddressScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) =>  AddNewAddress(),
+                        builder: (context) => AddNewAddress(),
                       ),
                     );
                   },
