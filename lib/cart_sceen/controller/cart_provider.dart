@@ -1,8 +1,14 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:phonix_smartphone_store/cart_sceen/model/cart_model.dart';
+import 'package:phonix_smartphone_store/cart_sceen/services/cart_services.dart';
 import 'package:phonix_smartphone_store/order/view/order_screen.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class CartProvider with ChangeNotifier {
+  //
+  CartModel? cartModel;
+  // 
   paymetButton(context) {
     Razorpay razorpay = Razorpay();
     var options = {
@@ -40,7 +46,6 @@ class CartProvider with ChangeNotifier {
           builder: (context) => const OrderScreen(),
         ),
         (route) => false);
-    
   }
 
   void handleExternalWalletSelected(ExternalWalletResponse response) {
@@ -70,5 +75,23 @@ class CartProvider with ChangeNotifier {
         return alert;
       },
     );
+  }
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  getDataOfCart() async {
+    Response? response = await CartServices().getCartDetails();
+
+    if (response?.statusCode == 200) {
+      cartModel = CartModel.fromJson(response?.data);
+    } else {
+      return null;
+    }
   }
 }

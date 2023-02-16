@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/address_screen/view/add_new_address_screen.dart';
 import 'package:phonix_smartphone_store/utils/constant_colors.dart';
+import 'package:phonix_smartphone_store/widgets/button/custom_button.dart';
 
 /// This screen is used to display the addresses of the
 /// user and user can add a new address.
@@ -68,7 +69,7 @@ class AddressScreen extends StatelessWidget {
             ListView.builder(
               physics: const ScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 10,
+              itemCount: 3,
               itemBuilder: (context, index) => Card(
                 elevation: 8,
                 child: Container(
@@ -101,6 +102,13 @@ class AddressScreen extends StatelessWidget {
                   ),
                 ),
               ),
+            ),
+            CustomButton(
+              title: 'Deliver to here',
+              ontap: () {},
+            ),
+            SizedBox(
+              height: size.height * 0.01,
             )
           ],
         ),

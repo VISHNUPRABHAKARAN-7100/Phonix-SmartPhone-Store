@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:phonix_smartphone_store/home_screen/controller/profile_provider.dart';
 import 'package:phonix_smartphone_store/home_screen/view/profile_title_widget.dart';

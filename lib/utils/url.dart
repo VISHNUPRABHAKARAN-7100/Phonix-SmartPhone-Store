@@ -25,4 +25,7 @@ class Urls {
 
   // API url for deletetowishlist
   static String delFromwishlist = "/delfromwishlist";
+
+  // API url for deletetowishlist
+  static String cart = "/cart";
 }
